@@ -66,16 +66,6 @@ const addO = (square) => {
     board[index] = 'O'
 }
 
-//Retreive board status of winning combos
-const boardSubArray = (winArray) => {
-    let subArray = []
-    console.log(winArray)
-    subArray = winArray.map((index) => {
-        return board[index]
-    })
-    return subArray
-}   
-
 //Checks if the game is a draw
 const checkDraw= () => {
     if (turn === 9) {
