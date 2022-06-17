@@ -9,6 +9,7 @@
 //==================================================
 
 //Declare gamebaord and square elements
+const body = document.querySelector('body')
 const gameBoard = document.querySelector('.board')
 const squares = document.querySelectorAll(".square")
 
@@ -22,6 +23,10 @@ let winner = ''
 let winMethod = ''
 //Game has a result
 let result = false
+//Result tallies
+let playerWins = 0
+let computerWins = 0
+let ties = 0
 
 //Index of winning array combos, and line classes needed 
 const winConditions = {
@@ -57,6 +62,7 @@ const addX = (square) => {
     square.textContent = 'X'
     let index = square.dataset.index - 1
     board[index] = 'X'
+    turn++
 }
 
 //Function to add an 'O'
@@ -64,17 +70,18 @@ const addO = (square) => {
     square.textContent = 'O'
     let index = square.dataset.index - 1
     board[index] = 'O'
+    turn++
 }
 
 //Checks if the game is a draw
-const checkDraw= () => {
+const checkForDraw= () => {
     if (turn === 9) {
-        winner = 'Draw'
+        winner = 'draw'
         result = true
     }
 }
 
-const checkWinner = () => {
+const checkForWin = () => {
     //get keys of win conditions object
     let winKeys = Object.keys(winConditions)
     //loop through win conditions to access possible win arrays (winCon)
@@ -104,17 +111,46 @@ const checkWinner = () => {
     }
 }
 
-const showLine = () => {
+const highlightWin = () => {
     let line = document.querySelector(winMethod)
-    //console.log(line)
     line.style.display = "inline"
 }
 
+const declareWinner = () => {
+    if (winner === 'draw') {
+        return
+    }
+    let h3 = document.createElement('h3')
+    if (winner === 'X') {
+        h3.textContent = 'Nice work! You won. Can you do it again?'
+    } else {
+        h3.textContent = 'Bad luck! The computer wins this round. Go again?'
+    }
+    body.appendChild(h3)
+}
 
-const resultStuff = () => {
-    showLine()
+// const declareDraw = () => {
+
+// }
+
+const restartGameButton = () => {
+    let restartButton = document.createElement('img')
+    restartButton.src = "img/Restart-icon-white.png"
+    restartButton.classList.add("restart")
+    body.appendChild(restartButton)
+    restartButton.addEventListener('click',restartGame)
+}
+
+const endGame = () => {
+    highlightWin()
+    declareWinner()
+    restartGameButton()
     console.log(`winner is ${winner}`)
     console.log(winMethod)
+}
+
+const restartGame = (event) => {
+console.log(event)
 }
 
 //Where the magic happens. Logic that runs each time an 'X' or 'O' is placed
@@ -131,11 +167,10 @@ takeTurn = (event) => {
     } else {
         addO(square)
     }
-    turn++
-    checkWinner()
-    checkDraw()
+    checkForWin()
+    checkForDraw()
     if (result === true) {
-        resultStuff()
+        endGame()
     }   
 }
 
@@ -146,7 +181,8 @@ takeTurn = (event) => {
 //Creates the board
 initaliseBoard()
 //Initialises takeTurn  
-gameBoard.addEventListener('click', takeTurn)
+body.addEventListener('click', takeTurn)
+restartGame()
 
 
 
