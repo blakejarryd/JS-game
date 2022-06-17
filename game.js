@@ -8,7 +8,7 @@
 //Global variables
 //==================================================
 
-//Declare body and square elements - probs be handy
+//Declare gamebaord and square elements
 const gameBoard = document.querySelector('.board')
 const squares = document.querySelectorAll(".square")
 
@@ -18,7 +18,7 @@ let turn = 0
 let board = []
 //used to record the winner
 let winner = ''
-//used to store the row/column/diagonal in which the game was win
+//used to store the row/column/diagonal in which the game was won
 let winMethod = ''
 //Game has a result
 let result = false

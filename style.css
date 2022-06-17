@@ -4,10 +4,54 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    font-family: 'Work Sans', sans-serif;
 }
 
-.board-overlay {
-    position: relative;
+header {
+    background-color: lightblue;
+    width: 100%;
+    height: 8%;
+    top: 0;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home {
+    padding-left: 10px;
+}
+
+.settings {
+    padding-right: 10px
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.tally {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
+
+.tally-tag {
+    display: flex;
+    align-items: center;
+}
+
+.tally-count {
+    display: flex;
+    align-items: center;
 }
 
 .board {
@@ -29,7 +73,7 @@ body {
     height: 200px;
     width: 200px;
     color: white;
-    font-size: 150px;
+    font-size: 190px;
 }
 
 .row2 .square {
@@ -46,7 +90,7 @@ body {
 }
 
 div[class*=line] {
-    background-color: lightsalmon;
+    background-color: white;
 }
 
 .row1-line {
