@@ -8,7 +8,7 @@
 //Global variables
 //==================================================
 
-//Declare gameboard and square elements
+//Declare required html elements
 const body = document.querySelector('body')
 const gameBoard = document.querySelector('.board')
 const squares = document.querySelectorAll(".square")
@@ -17,8 +17,10 @@ const computerTally = document.querySelector(".computer-tally-count")
 
 //Keeps track of game turn, incremented each time a square is played
 let turn = 0
+//Grid size
+let gridSize = 6
 //Used to track the status of the board
-let board = []
+let board = Array(gridSize * gridSize)
 //used to record the winner
 let winner = ''
 //Game has a result
@@ -28,33 +30,44 @@ let playerWins = 0
 let computerWins = 0
 let ties = 0
 
-//Index of winning array combos, and line classes needed 
+//Index of winning array combos
 const winConditions = {
-    row1: {array: [0,1,2]},
-    row2: {array: [3,4,5]},
-    row3: {array: [6,7,8]},
-    column1: {array: [0,3,6]},
-    column2: {array: [1,4,7]},
-    column3: {array: [2,5,8]},
-    diagonal1: {array: [0,4,8]},
-    diagonal2: {array: [2,4,6]},
+    row1:       [0,1,2],
+    row2:       [3,4,5],
+    row3:       [6,7,8],
+    column1:    [0,3,6],
+    column2:    [1,4,7],
+    column3:    [2,5,8],
+    diagonal1:  [0,4,8],
+    diagonal2:  [2,4,6],
 }
+
 
 //==================================================
 //Functions
 //==================================================
 
-//Board array to track state of play of the board i.e. what pieces are where
+//Add squares to board based on grid size
 const initaliseBoard = () => {
-    board = Array(squares.length)
-    for (let i = 0; i < board.length; i++) {
-        board[i] = ''
+    let squareSize = '200px'
+    if (gridSize === 4) {
+        squareSize = '190px'
     }
-}
-
-//Returns the selected square
-const squareSelect = (event) => {
-   return event.target
+    if (gridSize === 5) {
+        squareSize = '175px'
+    }
+    if (gridSize === 6) {
+        squareSize = '150px'
+    }
+    gameBoard.style.gridTemplateColumns = `repeat(${gridSize}, ${squareSize})`
+    gameBoard.style.gridTemplateRows = `repeat(${gridSize}, ${squareSize})`
+    for (let i = 1; i <= (gridSize * gridSize); i++) {
+        let square = document.createElement('div')
+        square.classList.add("square")
+        square.dataset.index = i
+        gameBoard.appendChild(square)
+    }
+    
 }
 
 //Function to add an 'X'
@@ -87,17 +100,17 @@ const checkForDraw= () => {
 
 const checkForWin = () => {
     //get keys of win conditions object
-    let winKeys = Object.keys(winConditions)
+    let winConditionKeys = Object.keys(winConditions)
     //loop through win conditions to access possible win arrays (winCon)
-    for (key of winKeys) {
-        let winCon = []
-        winCon = winConditions[key]['array']
+    for (key of winConditionKeys) {
+        let winIndex = []
+        winIndex = winConditions[key]
         //map winCon arrays to current board states (winLine)
-        let winLine = winCon.map((index) => {
+        let winLine = winIndex.map((index) => {
             return board[index] 
         })
         //just some useful debugging logs to see state of each winLine on every turn
-            //console.log(key + ' status ' + winLine)
+            console.log(key + ' status ' + winLine)
         //check if any win condition has been met - winLine array all same (excluding empty strings)
         if (winLine.some((a) => a === '')) {
         } else {
