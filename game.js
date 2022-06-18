@@ -19,8 +19,6 @@ let turn = 0
 let board = []
 //used to record the winner
 let winner = ''
-//used to store the row/column/diagonal in which the game was won
-let winMethod = ''
 //Game has a result
 let result = false
 //Result tallies
@@ -30,14 +28,14 @@ let ties = 0
 
 //Index of winning array combos, and line classes needed 
 const winConditions = {
-    row1: {array: [0,1,2], lineClass: ".row1-line"},
-    row2: {array: [3,4,5], lineClass: ".row2-line"},
-    row3: {array: [6,7,8], lineClass: ".row3-line"},
-    column1: {array: [0,3,6], lineClass: ".column1-line"},
-    column2: {array: [1,4,7], lineClass: ".column2-line"},
-    column3: {array: [2,5,8], lineClass: ".column3-line"},
-    diagonal1: {array: [0,4,8], lineClass: ".diagonal1-line"},
-    diagonal2: {array: [2,4,6], lineClass: ".diagonal2-line"},
+    row1: {array: [0,1,2]},
+    row2: {array: [3,4,5]},
+    row3: {array: [6,7,8]},
+    column1: {array: [0,3,6]},
+    column2: {array: [1,4,7]},
+    column3: {array: [2,5,8]},
+    diagonal1: {array: [0,4,8]},
+    diagonal2: {array: [2,4,6]},
 }
 
 //==================================================
@@ -93,27 +91,20 @@ const checkForWin = () => {
             return board[index] 
         })
         //just some useful debugging logs to see state of each winLine on every turn
-            // console.log(key + ' status ' + winLine)
+            console.log(key + ' status ' + winLine)
         //check if any win condition has been met - winLine array all same (excluding empty strings)
         if (winLine.some((a) => a === '')) {
             //do nothing, victory condition not met
         } else {
             if (winLine.every((a) => a === 'X')) {
                 winner = 'X'
-                winMethod = winConditions[key]['lineClass']
                 result = true
             } else if (winLine.every((a) => a === 'O')) {
                 winner = 'O'
-                winMethod = winConditions[key]['lineClass']
                 result = true
             }
         }
     }
-}
-
-const highlightWin = () => {
-    let line = document.querySelector(winMethod)
-    line.style.display = "inline"
 }
 
 const declareWinner = () => {
@@ -142,11 +133,9 @@ const restartGameButton = () => {
 }
 
 const endGame = () => {
-    highlightWin()
     declareWinner()
     restartGameButton()
     console.log(`winner is ${winner}`)
-    console.log(winMethod)
 }
 
 const restartGame = (event) => {
