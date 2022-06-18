@@ -75,6 +75,9 @@ const addO = (square) => {
 
 //Checks if the game is a draw
 const checkForDraw= () => {
+    if (result === true) {
+        return
+    }
     if (turn === 9) {
         winner = 'draw'
         ++ties
@@ -124,10 +127,6 @@ const declareResult = () => {
     }
     body.appendChild(h3)
 }
-
-// const declareDraw = () => {
-
-// }
 
 const restartGameButton = () => {
     let restartButton = document.createElement('img')
@@ -185,7 +184,7 @@ takeTurn = (event) => {
     } else {
         addO(square)
     }
-    checkForWin()
+    checkForWin() 
     checkForDraw()
     if (result === true) {
         endGame()
