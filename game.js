@@ -8,10 +8,12 @@
 //Global variables
 //==================================================
 
-//Declare gamebaord and square elements
+//Declare gameboard and square elements
 const body = document.querySelector('body')
 const gameBoard = document.querySelector('.board')
 const squares = document.querySelectorAll(".square")
+const playerTally = document.querySelector(".player-tally-count")
+const computerTally = document.querySelector(".computer-tally-count")
 
 //Keeps track of game turn, incremented each time a square is played
 let turn = 0
@@ -75,6 +77,7 @@ const addO = (square) => {
 const checkForDraw= () => {
     if (turn === 9) {
         winner = 'draw'
+        ++ties
         result = true
     }
 }
@@ -91,28 +94,30 @@ const checkForWin = () => {
             return board[index] 
         })
         //just some useful debugging logs to see state of each winLine on every turn
-            console.log(key + ' status ' + winLine)
+            //console.log(key + ' status ' + winLine)
         //check if any win condition has been met - winLine array all same (excluding empty strings)
         if (winLine.some((a) => a === '')) {
-            //do nothing, victory condition not met
         } else {
             if (winLine.every((a) => a === 'X')) {
                 winner = 'X'
+                playerWins++
+                playerTally.textContent = playerWins
                 result = true
             } else if (winLine.every((a) => a === 'O')) {
                 winner = 'O'
+                computerWins++
+                computerTally.textContent = computerWins
                 result = true
             }
         }
     }
 }
 
-const declareWinner = () => {
-    if (winner === 'draw') {
-        return
-    }
+const declareResult = () => {
     let h3 = document.createElement('h3')
-    if (winner === 'X') {
+    if (winner === 'draw') {
+        h3.textContent = 'This one is all tied up. Try again?'
+    } else if (winner === 'X') {
         h3.textContent = 'Nice work! You won. Can you do it again?'
     } else {
         h3.textContent = 'Bad luck! The computer wins this round. Go again?'
@@ -133,21 +138,45 @@ const restartGameButton = () => {
 }
 
 const endGame = () => {
-    declareWinner()
+    declareResult()
     restartGameButton()
     console.log(`winner is ${winner}`)
 }
 
-const restartGame = (event) => {
-console.log(event)
+const restartGame = () => {
+    //clear squares
+    squares.forEach((s) => {
+        s.textContent = ''
+    })
+    //remove declareResult text
+    let resultText = document.querySelector('h3')
+    resultText.remove()
+    //remove restart icon
+    let restartButton = document.querySelector('.restart')
+    restartButton.remove()
+    //reset turn count
+    turn = 0
+    //reset winner
+    winner = ''
+    //reset board array
+    board = []
+    //update result boolean to false
+    result = false
+    //check result tallies - debbuging only
+    console.log("player wins: " + playerWins)
+    console.log("computer wins: " + computerWins)
+    console.log("ties: " + ties)
+    console.log("the turn is: " + turn)
 }
 
-//Where the magic happens. Logic that runs each time an 'X' or 'O' is placed
+//Logic that runs each time an 'X' or 'O' is attempted to be placed
 takeTurn = (event) => {
-    let square = squareSelect(event)
+    let square = event.target
+    //if game is over return
     if (result === true) {
         return
     }
+    //if square already used return
     if (square.innerText != "") {
         return
     }
@@ -170,8 +199,8 @@ takeTurn = (event) => {
 //Creates the board
 initaliseBoard()
 //Initialises takeTurn  
-body.addEventListener('click', takeTurn)
-restartGame()
+gameBoard.addEventListener('click', takeTurn)
+
 
 
 

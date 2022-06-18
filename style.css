@@ -49,7 +49,7 @@ h2 {
     align-items: center;
 }
 
-.tally-count {
+[class*="tally-count"] {
     display: flex;
     align-items: center;
 }
@@ -86,4 +86,3 @@ h3 {
 .restart {
     cursor: pointer;
 }
-
