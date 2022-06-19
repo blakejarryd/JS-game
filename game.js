@@ -186,7 +186,7 @@ const restartGame = () => {
 }
 
 //Logic that runs each time an 'X' or 'O' is attempted to be placed
-takeTurn = (event) => {
+takeTurnX = (event) => {
     let square = event.target
     //if game is over return
     if (result === true) {
@@ -196,15 +196,19 @@ takeTurn = (event) => {
     if (square.innerText != "") {
         return
     }
-    if (turn % 2 === 0) {
-        addX(square)
-    } else {
-        addO(square)
-    }
+    // if (turn % 2 === 0) {
+    //    
+    // } else {
+    //     addO(square)
+    // }
+    addX(square)
     checkForWin() 
     checkForDraw()
     if (result === true) {
         endGame()
+    }
+    if (result === false) {
+    computerTurn()
     }   
 }
 
@@ -217,7 +221,7 @@ takeTurn = (event) => {
 //Creates the board
 initaliseBoard()
 //Initialises takeTurn  
-gameBoard.addEventListener('click', takeTurn)
+gameBoard.addEventListener('click', takeTurnX)
 
 
 
