@@ -7,7 +7,6 @@
 //==================================================
 //Global variables
 //==================================================
-
 //Declare required html elements
 const body = document.querySelector('body')
 const header = document.querySelector('header')
@@ -16,6 +15,7 @@ const gameBoard = document.querySelector('.board')
 const squares = document.querySelectorAll(".square")
 const playerTally = document.querySelector(".player-tally-count")
 const computerTally = document.querySelector(".computer-tally-count")
+const resultText = document.querySelector(".result")
 
 //Keeps track of game turn, incremented each time a square is played
 let turn = 0

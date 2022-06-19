@@ -29,7 +29,7 @@
                 <div class = "computer-tally-count">0</div>
             </div> 
         </div>
-        <div class = 'settings'>
+        <div class = 'settings-icon'>
             <img src="img/Settings-icon.png">
         </div>       
     </header>
@@ -37,7 +37,15 @@
         <div class = "board-overlay">
             <div class = 'board'></div>
         </div>
-        <div class = 'settings-menu'></div>
+        <div class = "settings-menu">
+            <div class = "dropdown">
+                <button class = "themes" data-dropdown-button>Themes</button>
+                <ul class = "dropdown-menu" data-dropwdown>
+                   <li class = 'theme'>Native Night</li>
+                   <li class = 'theme'>Bright White</li>
+                </ul>
+            </div>
+        </div>
     </main>
     <script src="game.js"></script>
     <script src="style.js"></script>
