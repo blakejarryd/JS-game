@@ -69,7 +69,9 @@ main {
 }
 
 .board-overlay {
-    outline: 3px solid black;
+    outline-width: 3px;
+    outline-style: solid;
+    outline-color: black;
     outline-offset: -3px;
 }
 
@@ -81,7 +83,9 @@ main {
 }
 
 .square {
-    border: 3px solid lightblue;
+    border-width: 3px;
+    border-style: solid;
+    border-color:lightblue;
     display: grid;
     place-items: center;
     /* align-items: center;
@@ -106,25 +110,17 @@ SETTINGS
 ****************************************/
 
 .settings-menu {
-    background-color: blue;
+    background-color: lightblue;
     height: 100%;
-    left: 0;
-    top: 0;
+    right: 0;
+    top: 8%;
     position: absolute;
-    width: 60px;
-    transition: width 2s;
-    /* visibility: hidden;
-    opacity: 0;
-    transition: position 0.5s linear; */
+    width: 0px; 
+    transition: width 1s;
 }
 
 
-.settings-menu:hover {
+.settings-show {
     width: 250px
 }
 
-/* .settings-show {
-    width: 250px;
-    visibility: visible;
-    opacity: 1;
-} */

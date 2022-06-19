@@ -10,6 +10,8 @@
 
 //Declare required html elements
 const body = document.querySelector('body')
+const header = document.querySelector('header')
+const boardOverlay = document.querySelector('.board-overlay')
 const gameBoard = document.querySelector('.board')
 const squares = document.querySelectorAll(".square")
 const playerTally = document.querySelector(".player-tally-count")
@@ -43,6 +45,7 @@ const winConditions = {
 }
 
 
+
 //==================================================
 //Functions
 //==================================================
@@ -67,7 +70,6 @@ const initaliseBoard = () => {
         square.dataset.index = i
         gameBoard.appendChild(square)
     }
-    
 }
 
 //Function to add an 'X'
@@ -131,6 +133,7 @@ const checkForWin = () => {
 
 const declareResult = () => {
     let h3 = document.createElement('h3')
+    h3.style.color = themes[theme].mainText
     if (winner === 'draw') {
         h3.textContent = 'This one is all tied up. Try again?'
     } else if (winner === 'X') {
@@ -143,7 +146,7 @@ const declareResult = () => {
 
 const restartGameButton = () => {
     let restartButton = document.createElement('img')
-    restartButton.src = "img/Restart-icon-white.png"
+    restartButton.src = themes[theme].restartIcon
     restartButton.classList.add("restart")
     body.appendChild(restartButton)
     restartButton.addEventListener('click',restartGame)
@@ -157,6 +160,7 @@ const endGame = () => {
 
 const restartGame = () => {
     //clear squares
+    let squares = document.querySelectorAll('.square')
     squares.forEach((s) => {
         s.textContent = ''
     })
@@ -203,6 +207,8 @@ takeTurn = (event) => {
         endGame()
     }   
 }
+
+
 
 //==================================================
 //Run Game
