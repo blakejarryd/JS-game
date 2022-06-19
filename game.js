@@ -18,7 +18,7 @@ const computerTally = document.querySelector(".computer-tally-count")
 //Keeps track of game turn, incremented each time a square is played
 let turn = 0
 //Grid size
-let gridSize = 6
+let gridSize = 3
 //Used to track the status of the board
 let board = Array(gridSize * gridSize)
 //used to record the winner
