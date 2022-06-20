@@ -82,6 +82,7 @@ main {
     grid-template-columns: repeat(3, 200px);
     grid-template-rows: repeat(3, 200px);
     cursor: pointer;
+    font-size: 150px;
 }
 
 .square {
@@ -93,7 +94,6 @@ main {
     /* align-items: center;
     justify-content: center; */
     color: white;
-    font-size: 150px;
 }
 
 .restart {

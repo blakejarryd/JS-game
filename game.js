@@ -55,15 +55,29 @@ const winConditions = {
 
 //Add squares to board based on grid size
 const initaliseBoard = () => {
-    let squareSize = '200px'
+    if (gridSize == 3) {
+        squareSize = '200px'
+        gameBoard.style.fontSize = '150px'
+    }
     if (gridSize == 4) {
         squareSize = '175px'
+        gameBoard.style.fontSize = '130px'
     }
     if (gridSize == 5) {
         squareSize = '150px'
+        gameBoard.style.fontSize = '110px'
     }
     if (gridSize == 6) {
         squareSize = '125px'
+        gameBoard.style.fontSize = '100px'
+    }
+    if (gridSize == 7) {
+        squareSize = '100px'
+        gameBoard.style.fontSize = '80px'
+    }
+    if (gridSize == 8) {
+        squareSize = '85px'
+        gameBoard.style.fontSize = '70px'
     }
     gameBoard.style.gridTemplateColumns = `repeat(${gridSize}, ${squareSize})`
     gameBoard.style.gridTemplateRows = `repeat(${gridSize}, ${squareSize})`
