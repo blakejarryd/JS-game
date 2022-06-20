@@ -5,7 +5,7 @@
 
 
 const themes = {
-    'Melbourne Blue': {
+    'Winter Blue': {
         background: '#011640',
         header: '#6093BF',
         headerText: '#BFCDD9',
@@ -39,13 +39,13 @@ const themes = {
         settingsIcon: 'img/Settings-icon-white.png',
         restartIcon: 'img/Restart-icon.png',
     },
-    'Sleeping Lilac': {
+    'Soothing Lilac': {
         background: '#F7F7FC',
         header: '#E4F1FE',
         headerText: 'black',
         mainText: '#D5CFE6',
         settingsBar: '#CFD4E6',
-        lines: '#F3E4FE',
+        lines: '#784890',
         homeIcon: 'img/Home-icon.png',
         settingsIcon: 'img/Settings-icon.png',
         restartIcon: 'img/Restart-icon.png',
