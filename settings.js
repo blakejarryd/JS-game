@@ -37,7 +37,7 @@ const themes = {
         lines: '#265C4B',
         homeIcon: 'img/Home-icon-white.png',
         settingsIcon: 'img/Settings-icon-white.png',
-        restartIcon: 'img/Restart-icon.png',
+        restartIcon: 'img/Restart-icon-white.png',
     },
     'Soothing Lilac': {
         background: '#F7F7FC',
@@ -59,7 +59,7 @@ const themes = {
         lines: '#737373',
         homeIcon: 'img/Home-icon-white.png',
         settingsIcon: 'img/Settings-icon-white.png',
-        restartIcon: 'img/Restart-icon.png',
+        restartIcon: 'img/Restart-icon-white.png',
     },
 }
 
@@ -194,7 +194,7 @@ hideDifficultyPanel = (event) => {
     if (!containsDifficulty) {
         return
     }
-    
+
 }
 
 

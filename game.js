@@ -269,15 +269,10 @@ const highlightWin = () => {
         winSquares = winIndex.map((index) => {
             return squares[index]
         })
-        //add win class to winning squares
+        //add win class to winning squares and set to line color
         for (square of winSquares) {
             square.classList.add('win')
-        }
-        //set all non-winnning squares to square border color
-        for (square of squares) {
-            if(!square.classList.contains('win')) {
-                square.style.color = themes[theme].lines
-            }
+            square.style.color = themes[theme].lines
         }
     }
 

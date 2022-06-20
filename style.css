@@ -145,7 +145,7 @@ SETTINGS
 
 .menu-header {
     position: relative;
-    color: #F2F2F2;
+    /* color: #F2F2F2; */
     top: 10px;
     left: 5px;
     width: 100%;
