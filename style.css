@@ -91,9 +91,11 @@ main {
     border-color:lightblue;
     display: grid;
     place-items: center;
-    /* align-items: center;
-    justify-content: center; */
     color: white;
+}
+
+.win {
+    text-emphasis: bold;
 }
 
 .restart {

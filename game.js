@@ -25,6 +25,7 @@ let gameMode = '3 x 3'
 //Used to track the status of the board
 let board = Array(gridSize * gridSize)
 let winner = ''
+let winMethod = ''
 //Game has a result
 let result = false
 //Result tallies
@@ -223,7 +224,7 @@ const checkForWin = () => {
             return board[index] 
         })
         //just some useful debugging logs to see state of each winLine on every turn
-           console.log(key + ' status ' + winLine)
+           //console.log(key + ' status ' + winLine)
         //check if any win condition has been met - winLine array all same (excluding empty strings)
         if (winLine.some((a) => a === '')) {
         } else {
@@ -232,15 +233,42 @@ const checkForWin = () => {
                 playerWins++
                 playerTally.textContent = playerWins
                 result = true
+                winMethod = key
             } else if (winLine.every((a) => a === 'O')) {
                 winner = 'O'
                 computerWins++
                 computerTally.textContent = computerWins
                 result = true
+                winMethod = key
             }
         }
     }
 }
+
+const highlightWin = () => {
+        let squares = document.querySelectorAll('.square')
+        let winIndex = gameData[gameMode].winConditions[winMethod]
+        console.log(winIndex)
+        // console.log(squares)
+        // console.log(typeof squares)
+        let winSquares = []
+        winSquares = winIndex.map((index) => {
+            return squares[index]
+        })
+        //add win class to winning squares
+        for (square of winSquares) {
+            square.classList.add('win')
+        }
+        //set all non-winnning squares to square border color
+        for (square of squares) {
+            if(!square.classList.contains('win')) {
+                square.style.color = themes[theme].lines
+            }
+        }
+    }
+
+
+
 
 const declareResult = () => {
     let h3 = document.createElement('h3')
@@ -264,6 +292,7 @@ const restartGameButton = () => {
 }
 
 const endGame = () => {
+    highlightWin()
     declareResult()
     restartGameButton()
     console.log(`winner is ${winner}`)
@@ -272,7 +301,6 @@ const endGame = () => {
 const restartGame = () => {
     //remove squares
     let squares = document.querySelectorAll('.square')
-    console.log(squares)
     for (square of squares) {
         square.remove()
     }
@@ -296,11 +324,6 @@ const restartGame = () => {
     result = false
     //create board
     initaliseBoard()
-    //check result tallies - debbuging only
-    console.log("player wins: " + playerWins)
-    console.log("computer wins: " + computerWins)
-    console.log("ties: " + ties)
-    console.log("the turn is: " + turn)
 }
 
 //Logic that runs each time an 'X' or 'O' is attempted to be placed
@@ -323,6 +346,7 @@ takeTurnX = (event) => {
     checkForWin() 
     checkForDraw()
     if (result === true) {
+        console.log('the win method is ' + winMethod)
         endGame()
     }
     if (result === false) {
