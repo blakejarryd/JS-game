@@ -160,7 +160,6 @@ setBoardSize = (event) => {
             //update dropdown selected background colour
             element.style.backgroundColor = themes[theme].lines
         } else {
-            console.log(element.textContent)
             element.classList.remove('selected')
             element.style.backgroundColor = themes[theme].settingsBar
         }
@@ -168,6 +167,35 @@ setBoardSize = (event) => {
     restartGame()
 }
 
+changeDifficulty = (event) => {
+    classArr = event.target.classList
+    containsDifficulty = classArr.contains('difficulty')
+    if (!containsDifficulty) {
+        return
+    } else {
+        difficulty = event.target.textContent
+    }
+    let difficultyElements = document.querySelectorAll('.difficulty')
+    for (element of difficultyElements) {
+        if (element.textContent === difficulty) {
+            element.classList.add('selected')
+            //update dropdown selected background colour
+            element.style.backgroundColor = themes[theme].lines
+        } else {
+            element.classList.remove('selected')
+            element.style.backgroundColor = themes[theme].settingsBar
+        }
+    }
+}
+
+hideDifficultyPanel = (event) => {
+    classArr = event.target.classList
+    containsDifficulty = classArr.contains('difficulty')
+    if (!containsDifficulty) {
+        return
+    }
+    
+}
 
 
 const settingsIcon = document.querySelector('.settings-icon')
@@ -177,5 +205,7 @@ settingsIcon.addEventListener('click', expandSettingsMenu)
 body.addEventListener('click', expandDropdown)
 body.addEventListener('click', setThemeClick)
 body.addEventListener('click', setBoardSize)
+body.addEventListener('click', changeDifficulty)
+body.addEventListener('click', hideDifficultyPanel)
 // setTheme(theme)
 //use plus/minus for expand? highlight should be on the dropdown menu items.

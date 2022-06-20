@@ -38,6 +38,10 @@ header {
     cursor: pointer;
 }
 
+.settings-icon:hover {
+    transform: rotate(180)
+}
+
 .player {
     display: flex;
     flex-direction: column;
@@ -172,6 +176,10 @@ li:hover {
     filter:brightness(80%)
 }
 
+.hide {
+    display: none;
+}
+
 /* toggle-switch */
 .multiplayer {
     width: 100%;
@@ -213,10 +221,6 @@ label:after {
 input:checked + label:after {
 	left: calc(100%);
 	transform: translateX(-100%);
-}
-
-label:active:after {
-	width: 130px;
 }
 
 

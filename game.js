@@ -25,6 +25,7 @@ let turn = 0
 let gridSize = 3
 let gameMode = '3 x 3'
 let twoPlayer = false
+let difficulty = 'Easy'
 //Used to track the status of the board
 let board = Array(gridSize * gridSize)
 let winner = ''
@@ -379,6 +380,8 @@ twoPlayerMode = (event) => {
         twoPlayer = false
         multiplayerSwitchLabel.style.background = 'grey'
     }
+    let difficultyPanel = document.querySelector('.AI')
+    difficultyPanel.classList.toggle('hide')
     resetStats()
     restartGame()
 }
