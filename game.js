@@ -12,16 +12,19 @@ const body = document.querySelector('body')
 const header = document.querySelector('header')
 const boardOverlay = document.querySelector('.board-overlay')
 const gameBoard = document.querySelector('.board')
-const squares = document.querySelectorAll(".square")
-const playerTally = document.querySelector(".player-tally-count")
-const computerTally = document.querySelector(".computer-tally-count")
-const resultText = document.querySelector(".result")
-const settingsMenu = document.querySelector(".settings-menu")
+const squares = document.querySelectorAll('.square')
+const playerTally = document.querySelector('.player-tally-count')
+const computerTally = document.querySelector('.computer-tally-count')
+const resultText = document.querySelector('.result')
+const settingsMenu = document.querySelector('.settings-menu')
+const twoPlayerSwitch = document.querySelector('input')
+const computerName = document.querySelector('.computer-name')
 
 //Keeps track of game turn, incremented each time a square is played
 let turn = 0
 let gridSize = 3
 let gameMode = '3 x 3'
+let twoPlayer = false
 //Used to track the status of the board
 let board = Array(gridSize * gridSize)
 let winner = ''
@@ -186,6 +189,12 @@ const initaliseBoard = () => {
         square.dataset.index = i
         gameBoard.appendChild(square)
     }
+    //logic based on 2player or 1player
+    if (twoPlayer) {
+        computerName.textContent = 'Player 2'
+    } else {
+        computerName.textContent = 'Computer'
+    }
 }
 
 //Function to add an 'X'
@@ -341,24 +350,46 @@ takeTurnX = (event) => {
     if (square.innerText != "") {
         return
     }
-    // if (turn % 2 === 0) {
-    //    
-    // } else {
-    //     addO(square)
-    // }
-    addX(square)
+    if (twoPlayer) {
+        if (turn % 2 === 0) {
+        addX(square)
+        } else {
+        addO(square)
+        }
+    } else {
+        addX(square)
+    }
     checkForWin() 
     checkForDraw()
     if (result === true) {
         console.log('the win method is ' + winMethod)
         endGame()
     }
-    if (result === false) {
+    if (result === false && twoPlayer === false) {
     computerTurn()
     }   
 }
 
+twoPlayerMode = (event) => {
+    let multiplayerSwitchLabel = document.querySelector('label') 
+    if (event.target.checked) {
+        twoPlayer = true
+        multiplayerSwitchLabel.style.background = themes[theme].lines
+    } else {
+        twoPlayer = false
+        multiplayerSwitchLabel.style.background = 'grey'
+    }
+    resetStats()
+    restartGame()
+}
 
+resetStats = () => {
+    playerWins = 0
+    computerWins = 0
+    ties = 0
+    playerTally.textContent = playerWins
+    computerTally.textContent = computerWins
+}
 
 //==================================================
 //Run Game
@@ -368,6 +399,7 @@ takeTurnX = (event) => {
 initaliseBoard()
 //Initialises takeTurn  
 gameBoard.addEventListener('click', takeTurnX)
+twoPlayerSwitch.addEventListener('click', twoPlayerMode)
 
 
 

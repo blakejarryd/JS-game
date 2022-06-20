@@ -16,14 +16,14 @@
             <img class = "home-icon-img" src="img/Home-icon-white.png">
         </div>
         <div class = "player">
-            <h2 class = "name">Player</h2>
+            <h2 class = "player-name">Player</h2>
             <div class = "tally">
                 <div class = "tally-tag">Wins</div>
                 <div class = "player-tally-count">0</div>
             </div> 
         </div>
         <div class = "player">
-            <h2 class = "name">Computer</h2>
+            <h2 class = "computer-name">Computer</h2>
             <div class = "tally">
                 <div class = "tally-tag">Wins</div>
                 <div class = "computer-tally-count">0</div>
@@ -38,13 +38,13 @@
             <div class = 'board'></div>
         </div>
         <div class = "settings-menu">
-            <div class = 'multiplayer'>Multiplayer?
-                <input type="checkbox" id="switch"/>
+            <div class = 'menu-header multiplayer'>2 Player Mode
+                <input type = "checkbox" id = "switch"/>
                 <label for="switch">Toggle</label>   
             </div>
-            <div class = "dropdown">
-                <button class = "themes" data-dropdown-button>Themes</button>
-                <ul class = "dropdown-menu" data-dropwdown>
+            <div class = "menu">
+                <div class = "menu-header" data-dropdown-button>Themes</div>
+                <ul class = "menu-list" data-dropwdown>
                    <li class = 'theme'>Winter Blue</li>
                    <li class = 'theme'>Orange Pop</li>
                    <li class = 'theme'>Mountain Mist</li>
@@ -52,9 +52,9 @@
                    <li class = 'theme'>Stone & Chalk</li>
                 </ul>
             </div>
-            <div class = "dropdown">
-                <button class = "gridSizes" data-dropdown-button>Grid Size</button>
-                <ul class = "dropdown-menu" data-dropwdown>
+            <div class = "menu">
+                <div class = "menu-header" data-dropdown-button>Grid Size</div>
+                <ul class = "menu-list" data-dropwdown>
                    <li class = 'gridSize selected'>3 x 3</li>
                    <li class = 'gridSize'>4 x 4</li>
                    <li class = 'gridSize'>5 x 5</li>

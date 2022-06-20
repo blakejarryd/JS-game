@@ -89,10 +89,18 @@ setTheme = (theme) => {
         square.style.borderColor = themes[theme].lines
     }
     //update icons
-    const settingsIcon = document.querySelector(".settings-icon-img")
+    let settingsIcon = document.querySelector(".settings-icon-img")
     settingsIcon.src = themes[theme].settingsIcon
-    const homeIcon = document.querySelector(".home-icon-img")
+    let homeIcon = document.querySelector(".home-icon-img")
     homeIcon.src = themes[theme].homeIcon
+    //update multiplayer switch accent
+    let multiplayerSwitch = document.querySelector('input')
+    let multiplayerSwitchLabel = document.querySelector('label')
+    if (multiplayerSwitch.checked) {
+        multiplayerSwitchLabel.style.background = themes[theme].lines
+    } else (
+        multiplayerSwitchLabel.style.background = 'grey' 
+    )
     //add selected class to li element
     let themeElements = document.querySelectorAll('.theme')
     for (element of themeElements) {
