@@ -120,6 +120,8 @@ SETTINGS
     position: absolute;
     width: 0px; 
     transition: width 1s;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -127,7 +129,7 @@ SETTINGS
     width: 150px;
 }
 
-.themes {
+button {
     position: relative;
     top: 10px;
     width: 100%;
@@ -142,22 +144,24 @@ SETTINGS
 .dropdown-menu {
     list-style-type: none;
     padding-left: 10px;
-    visibility: collapse;
+    display: none;
 }
 
 .dropwdown-show {
-    visibility: visible;
+    display: block;
 }
-
 
 li {
     margin-bottom: 4px;
     cursor: pointer;
+    padding: 5px;
 }
 
 li:hover {
     background-color: rgb(221, 216, 216);
 }
+
+
 
 
 

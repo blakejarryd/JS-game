@@ -56,14 +56,14 @@ const winConditions = {
 //Add squares to board based on grid size
 const initaliseBoard = () => {
     let squareSize = '200px'
-    if (gridSize === 4) {
-        squareSize = '190px'
-    }
-    if (gridSize === 5) {
+    if (gridSize == 4) {
         squareSize = '175px'
     }
-    if (gridSize === 6) {
+    if (gridSize == 5) {
         squareSize = '150px'
+    }
+    if (gridSize == 6) {
+        squareSize = '125px'
     }
     gameBoard.style.gridTemplateColumns = `repeat(${gridSize}, ${squareSize})`
     gameBoard.style.gridTemplateRows = `repeat(${gridSize}, ${squareSize})`
@@ -162,17 +162,22 @@ const endGame = () => {
 }
 
 const restartGame = () => {
-    //clear squares
+    //remove squares
     let squares = document.querySelectorAll('.square')
-    squares.forEach((s) => {
-        s.textContent = ''
-    })
+    console.log(squares)
+    for (square of squares) {
+        square.remove()
+    }
     //remove declareResult text
     let resultText = document.querySelector('h3')
-    resultText.remove()
+    if (resultText) {
+        resultText.remove()
+    } 
     //remove restart icon
     let restartButton = document.querySelector('.restart')
+    if (restartButton) {
     restartButton.remove()
+    }
     //reset turn count
     turn = 0
     //reset winner
@@ -181,6 +186,8 @@ const restartGame = () => {
     board = []
     //update result boolean to false
     result = false
+    //create board
+    initaliseBoard()
     //check result tallies - debbuging only
     console.log("player wins: " + playerWins)
     console.log("computer wins: " + computerWins)

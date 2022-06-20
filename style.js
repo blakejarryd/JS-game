@@ -50,7 +50,7 @@ const themes = {
         lines: '#9CD8CE',
         homeIcon: 'img/Home-icon-white.png',
         settingsIcon: 'img/Settings-icon-white.png',
-        restartIcon: 'img/Restart-icon-white.png',
+        restartIcon: 'img/Restart-icon.png',
     },
 }
 
@@ -93,26 +93,34 @@ setTheme = (event) => {
 
     
 expandDropdown = (event) => {
-const isDropdownButton = event.target.matches('[data-dropdown-button]')
-if (!isDropdownButton) {
-    return
+    const isDropdownButton = event.target.matches('[data-dropdown-button]')
+    if (!isDropdownButton) {
+        return
+    }
+    let dropdown = event.target.parentNode
+    let dropdownList = dropdown.querySelector('.dropdown-menu')
+    dropdownList.classList.toggle('dropwdown-show')    
 }
-let dropdown = event.target.parentNode
-let dropdownList = dropdown.querySelector('.dropdown-menu')
-dropdownList.classList.toggle('dropwdown-show')
-if (dropdownList.classList.contains('dropwdown-show')) {
-    event.target.innerText = 'Themes  -'
-} else {
-    event.target.innerText = 'Themes  +'
+
+setBoardSize = (event) => {
+    classArr = event.target.classList
+    containsGridSize = classArr.contains('gridSize')
+    if (!containsGridSize) {
+        return
+    } else {
+        let size = event.target.textContent
+        gridSize = size.charAt(0)
+    }
+    restartGame()
 }
-    
-}
+
+
 
 const settingsIcon = document.querySelector('.settings-icon')
 
 settingsIcon.addEventListener('click', expandSettingsMenu)
 body.addEventListener('click', expandDropdown)
 body.addEventListener('click', setTheme)
-
+body.addEventListener('click', setBoardSize)
 // setTheme(theme)
 //use plus/minus for expand? highlight should be on the dropdown menu items.
