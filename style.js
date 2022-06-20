@@ -3,27 +3,55 @@
 //==================================================
 
 
-let theme = 'Native Night'
+
+let theme = 'Theme 1'
 
 const themes = {
-    'Native Night': {
-        background: 'black',
-        header: 'lightblue',
-        headerText: 'black',
-        homeIcon: 'img/Home-icon.png',
-        settingsIcon: 'img/Settings-icon.png',
-        mainText: 'white',
+    'Theme 1': {
+        background: '#011640',
+        header: '#6093BF',
+        headerText: '#BFCDD9',
+        mainText: '#BFCDD9',
+        settingsBar: '#6093BF',
+        lines: '#008F9F',
+        themeHover: 'darkgrey',
+        homeIcon: 'img/Home-icon-white.png',
+        settingsIcon: 'img/Settings-icon-white.png',
         restartIcon: 'img/Restart-icon-white.png',
     },
-    'Bright White': {
-        background: 'white',
-        header: 'green',
+    'Theme 2': {
+        background: '#1B1F3A',
+        header: '#008F9F',
+        headerText: '#F2F2F2',
+        mainText: '#F2B950',
+        settingsBar: '#008F9F',
+        lines: '#F97E11',
+        homeIcon: 'img/Home-icon-white.png',
+        settingsIcon: 'img/Settings-icon-white.png',
+        restartIcon: 'img/Restart-icon-white.png',
+    },
+    'Theme 3': {
+        background: '#F2F2F2',
+        header: '#F2D9D0',
         headerText: 'black',
+        mainText: '#F2C5BB',
+        settingsBar: '#F2D9D0',
+        lines: '#F2B9AC',
         homeIcon: 'img/Home-icon.png',
         settingsIcon: 'img/Settings-icon.png',
-        mainText: 'black',
         restartIcon: 'img/Restart-icon.png',
-    }
+    },
+    'Theme 4': {
+        background: '#F2F2F2',
+        header: '#585859',
+        headerText: '#A9DED4',
+        mainText: '#A6A6A6',
+        settingsBar: '#585859',
+        lines: '#9CD8CE',
+        homeIcon: 'img/Home-icon-white.png',
+        settingsIcon: 'img/Settings-icon-white.png',
+        restartIcon: 'img/Restart-icon-white.png',
+    },
 }
 
 expandSettingsMenu = () => {
@@ -37,15 +65,29 @@ setTheme = (event) => {
     if (!containsTheme) {
         return
     } else {
-        let theme = event.target.textContent
+        theme = event.target.textContent
+        //update backgroundColors of elements
         body.style.background = themes[theme].background
         header.style.background = themes[theme].header
         boardOverlay.style.outlineColor = themes[theme].background
+        settingsMenu.style.background = themes[theme].settingsBar
+        //update text colors
+        header.style.color = themes[theme].headerText
+        settingsMenu.style.color = themes[theme].headerText
+        //update setting button colors
+        let buttons = document.querySelector('button')
+        buttons.style.color = themes[theme].headerText
+        //uppdate all the squares
         let squares = document.querySelectorAll('.square')
         for (let square of squares) {
             square.style.color = themes[theme].mainText
-            square.style.borderColor = themes[theme].header
+            square.style.borderColor = themes[theme].lines
         }
+        //update icons
+        const settingsIcon = document.querySelector(".settings-icon-img")
+        settingsIcon.src = themes[theme].settingsIcon
+        const homeIcon = document.querySelector(".home-icon-img")
+        homeIcon.src = themes[theme].homeIcon
     }   
 }
 
@@ -55,10 +97,15 @@ const isDropdownButton = event.target.matches('[data-dropdown-button]')
 if (!isDropdownButton) {
     return
 }
-
 let dropdown = event.target.parentNode
 let dropdownList = dropdown.querySelector('.dropdown-menu')
 dropdownList.classList.toggle('dropwdown-show')
+if (dropdownList.classList.contains('dropwdown-show')) {
+    event.target.innerText = 'Themes  -'
+} else {
+    event.target.innerText = 'Themes  +'
+}
+    
 }
 
 const settingsIcon = document.querySelector('.settings-icon')
@@ -68,3 +115,4 @@ body.addEventListener('click', expandDropdown)
 body.addEventListener('click', setTheme)
 
 // setTheme(theme)
+//use plus/minus for expand? highlight should be on the dropdown menu items.

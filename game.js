@@ -16,6 +16,9 @@ const squares = document.querySelectorAll(".square")
 const playerTally = document.querySelector(".player-tally-count")
 const computerTally = document.querySelector(".computer-tally-count")
 const resultText = document.querySelector(".result")
+const settingsMenu = document.querySelector(".settings-menu")
+
+
 
 //Keeps track of game turn, incremented each time a square is played
 let turn = 0
@@ -112,7 +115,7 @@ const checkForWin = () => {
             return board[index] 
         })
         //just some useful debugging logs to see state of each winLine on every turn
-            console.log(key + ' status ' + winLine)
+           // console.log(key + ' status ' + winLine)
         //check if any win condition has been met - winLine array all same (excluding empty strings)
         if (winLine.some((a) => a === '')) {
         } else {
