@@ -4,8 +4,6 @@
 
 
 
-let theme = 'Theme 1'
-
 const themes = {
     'Theme 1': {
         background: '#011640',
@@ -75,8 +73,10 @@ setTheme = (event) => {
         header.style.color = themes[theme].headerText
         settingsMenu.style.color = themes[theme].headerText
         //update setting button colors
-        let buttons = document.querySelector('button')
-        buttons.style.color = themes[theme].headerText
+        let buttons = document.querySelectorAll('button')
+        for (button of buttons) {
+        button.style.color = themes[theme].headerText
+        }
         //uppdate all the squares
         let squares = document.querySelectorAll('.square')
         for (let square of squares) {
@@ -109,6 +109,7 @@ setBoardSize = (event) => {
         return
     } else {
         let size = event.target.textContent
+        gameMode = size
         gridSize = size.charAt(0)
     }
     restartGame()
@@ -117,6 +118,7 @@ setBoardSize = (event) => {
 
 
 const settingsIcon = document.querySelector('.settings-icon')
+body = document.querySelector('body')
 
 settingsIcon.addEventListener('click', expandSettingsMenu)
 body.addEventListener('click', expandDropdown)
