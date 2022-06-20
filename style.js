@@ -85,11 +85,8 @@ setTheme = (theme) => {
     //add selected class to li element
     let themeElements = document.querySelectorAll('.theme')
     for (element of themeElements) {
-        //console.log(theme)
         if (element.textContent === theme) {
             element.classList.add('selected')
-            //update dropdown selected background colour
-            // element.style.backgroundColor = themes[theme].lines
         } else {
             element.classList.remove('selected')
         }

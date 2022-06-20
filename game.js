@@ -182,6 +182,7 @@ const initaliseBoard = () => {
         let square = document.createElement('div')
         square.classList.add("square")
         square.style.borderColor = themes[theme].lines
+        square.style.color = themes[theme].mainText
         square.dataset.index = i
         gameBoard.appendChild(square)
     }

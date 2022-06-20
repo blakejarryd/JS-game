@@ -130,7 +130,7 @@ SETTINGS
 
 
 .settings-show {
-    width: 150px;
+    width: 120px;
 }
 
 button {
@@ -148,12 +148,13 @@ button {
 
 .dropdown-menu {
     list-style-type: none;
-    padding-left: 10px;
+    padding-left: 0px;
     display: none;
 }
 
 .dropwdown-show {
     display: block;
+    text-align: center;
 }
 
 li {
@@ -166,9 +167,6 @@ li:hover {
     background-color: rgb(221, 216, 216);
 }
 
-li.selected {
-    background-color: grey;
-}
 
 
 
