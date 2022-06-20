@@ -33,7 +33,10 @@ let playerWins = 0
 let computerWins = 0
 let ties = 0
 //theme
-let theme = 'Theme 1'
+let theme = 'Theme 2'
+setTheme(theme)
+
+
 
 //Required game data
 const gameData = {
