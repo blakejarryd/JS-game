@@ -260,24 +260,21 @@ const checkForWin = () => {
 }
 
 const highlightWin = () => {
-        let squares = document.querySelectorAll('.square')
-        let winIndex = gameData[gameMode].winConditions[winMethod]
-        console.log(winIndex)
-        // console.log(squares)
-        // console.log(typeof squares)
-        let winSquares = []
-        winSquares = winIndex.map((index) => {
-            return squares[index]
-        })
-        //add win class to winning squares and set to line color
-        for (square of winSquares) {
-            square.classList.add('win')
-            square.style.color = themes[theme].lines
-        }
+    if (winMethod == '') {
+        return
     }
-
-
-
+    let squares = document.querySelectorAll('.square')
+    let winIndex = gameData[gameMode].winConditions[winMethod]
+    let winSquares = []
+    winSquares = winIndex.map((index) => {
+        return squares[index]
+    })
+    //add win class to winning squares and set to line color
+    for (square of winSquares) {
+        square.classList.add('win')
+        square.style.color = themes[theme].lines
+    }
+}
 
 const declareResult = () => {
     let h3 = document.createElement('h3')
@@ -304,7 +301,6 @@ const endGame = () => {
     highlightWin()
     declareResult()
     restartGameButton()
-    console.log(`winner is ${winner}`)
 }
 
 const restartGame = () => {
@@ -358,7 +354,6 @@ takeTurnX = (event) => {
     checkForWin() 
     checkForDraw()
     if (result === true) {
-        console.log('the win method is ' + winMethod)
         endGame()
     }
     if (result === false && twoPlayer === false) {

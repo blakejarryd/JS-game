@@ -111,7 +111,6 @@ setTheme = (theme) => {
         }
     } 
     let listItems = document.querySelectorAll('li')
-    console.log(listItems)
     for (item of listItems) {
         if (item.classList.contains('selected')) {
             item.style.backgroundColor = themes[theme].lines
