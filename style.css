@@ -29,7 +29,11 @@ header {
     font-weight: bold;
 }
 
-.home {
+.title {
+    width: 800px;
+}
+
+.hash {
     padding-left: 10px;
 }
 
@@ -131,16 +135,16 @@ SETTINGS
     position: absolute;
     width: 0px; 
     transition: width 0.7s;
-    display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    visibility: collapse;
+    display: none;
 }
 
 
 .settings-show {
     width: 160px;
-    visibility: visible;
+    display: flex;
+    right: 0;
 }
 
 .menu-header {
@@ -168,7 +172,7 @@ li {
     margin-bottom: 4px;
     cursor: pointer;
     padding: 5px 0px 5px 15px;
-    width: 150px;
+    width: 145px;
     position: relative;
 }
 

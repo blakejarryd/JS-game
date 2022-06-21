@@ -38,6 +38,14 @@ let computerWins = 0
 let ties = 0
 //theme
 let theme = 'Orange Pop'
+//display mode
+let display = 'desktopDisplay'
+displayWidth = window.innerWidth
+if (displayWidth < 600) {
+    display = 'mobileDisplay'
+} 
+console.log(displayWidth)
+console.log(display)
 setTheme(theme)
 
 
@@ -48,8 +56,14 @@ setTheme(theme)
 const gameData = {
     '3 x 3': {
         gridSize: 3,
-        squareSize: '200px',
-        fontSize: '150px',
+        desktopDisplay: {
+            squareSize: '200px',
+            fontSize: '175px',
+        },
+        mobileDisplay: {
+            squareSize: '100px',
+            fontSize: '85px',
+        },
         maxTurns: 9,
         winConditions: {
             row1:       [0,1,2],
@@ -64,8 +78,14 @@ const gameData = {
     },
     '4 x 4': {
         gridSize: 4,
-        squareSize: '175px',
-        fontSize: '130px',
+        desktopDisplay: {
+            squareSize: '150px',
+            fontSize: '120px',
+        },
+        mobileDisplay: {
+            squareSize: '75px',
+            fontSize: '62px',
+        },
         maxTurns: 16,
         winConditions: {
             row1:       [0,1,2,3],
@@ -82,8 +102,14 @@ const gameData = {
     },
     '5 x 5': {
         gridSize: 5,
-        squareSize: '150px',
-        fontSize: '110px',
+        desktopDisplay: {
+            squareSize: '120px',
+            fontSize: '100px',
+        },
+        mobileDisplay: {
+            squareSize: '60px',
+            fontSize: '50px',
+        },
         maxTurns: 25,
         winConditions: {
             row1:       [0,1,2,3,4],
@@ -102,8 +128,14 @@ const gameData = {
     },
     '6 x 6': {
         gridSize: 6,
-        squareSize: '125px',
-        fontSize: '100px',
+        desktopDisplay: {
+            squareSize: '100px',
+            fontSize: '85px',
+        },
+        mobileDisplay: {
+            squareSize: '50px',
+            fontSize: '42px',
+        },
         maxTurns: 36,
         winConditions: {
             row1:       [0,1,2,3,4,5],
@@ -124,8 +156,14 @@ const gameData = {
     },
     '7 x 7': {
         gridSize: 7,
-        squareSize: '100px',
-        fontSize: '80px',
+        desktopDisplay: {
+            squareSize: '85px',
+            fontSize: '70px',
+        },
+        mobileDisplay: {
+            squareSize: '43px',
+            fontSize: '38px',
+        },
         maxTurns: 49,
         winConditions: {
             row1:       [0,1,2,3,4,5,6],
@@ -148,8 +186,14 @@ const gameData = {
     },
     '8 x 8': {
         gridSize: 8,
-        squareSize: '85px',
-        fontSize: '70px',
+        desktopDisplay: {
+            squareSize: '75px',
+            fontSize: '62px',
+        },
+        mobileDisplay: {
+            squareSize: '37.5px',
+            fontSize: '33px',
+        },
         maxTurns: 64,
         winConditions: {
             row1:       [0,1,2,3,4,5,6,7],
@@ -211,8 +255,8 @@ const feedbackMessages = {
 
 //Add squares to board based on grid size
 const initaliseBoard = () => {
-    squareSize = gameData[gameMode].squareSize
-    gameBoard.style.fontSize = gameData[gameMode].fontSize
+    squareSize = gameData[gameMode][display].squareSize
+    gameBoard.style.fontSize = gameData[gameMode][display].fontSize
     gameBoard.style.gridTemplateColumns = `repeat(${gridSize}, ${squareSize})`
     gameBoard.style.gridTemplateRows = `repeat(${gridSize}, ${squareSize})`
     for (let i = 1; i <= (gridSize * gridSize); i++) {

@@ -11,7 +11,7 @@ const themes = {
         settingsBar: '#356084',
         lines: '#008F9F',
         themeHover: 'darkgrey',
-        homeIcon: 'img/Home-icon-white.png',
+        hashIcon: 'img/Hash-white.png',
         settingsIcon: 'img/Settings-icon-white.png',
         restartIcon: 'img/Restart-icon-white.png',
     },
@@ -22,7 +22,7 @@ const themes = {
         mainText: '#F2B950',
         settingsBar: '#00646f',
         lines: '#F97E11',
-        homeIcon: 'img/Home-icon-white.png',
+        hashIcon: 'img/Hash-white.png',
         settingsIcon: 'img/Settings-icon-white.png',
         restartIcon: 'img/Restart-icon-white.png',
     },
@@ -33,7 +33,7 @@ const themes = {
         mainText: '#d0d0d0',
         settingsBar: '#589A8D',
         lines: '#265C4B',
-        homeIcon: 'img/Home-icon-white.png',
+        hashIcon: 'img/Hash-white.png',
         settingsIcon: 'img/Settings-icon-white.png',
         restartIcon: 'img/Restart-icon-white.png',
     },
@@ -44,7 +44,7 @@ const themes = {
         mainText: '#D5CFE6',
         settingsBar: '#CFD4E6',
         lines: '#784890',
-        homeIcon: 'img/Home-icon.png',
+        hashIcon: 'img/Hash.png',
         settingsIcon: 'img/Settings-icon.png',
         restartIcon: 'img/Restart-icon.png',
     },
@@ -55,7 +55,7 @@ const themes = {
         mainText: '#FBF7F5',
         settingsBar: '#595959',
         lines: '#737373',
-        homeIcon: 'img/Home-icon-white.png',
+        hashIcon: 'img/Hash-white.png',
         settingsIcon: 'img/Settings-icon-white.png',
         restartIcon: 'img/Restart-icon-white.png',
     },
@@ -93,8 +93,8 @@ setTheme = (theme) => {
     //update icons
     let settingsIcon = document.querySelector(".settings-icon-img")
     settingsIcon.src = themes[theme].settingsIcon
-    let homeIcon = document.querySelector(".home-icon-img")
-    homeIcon.src = themes[theme].homeIcon
+    let hashIcon = document.querySelector(".hash-icon-img")
+    hashIcon.src = themes[theme].hashIcon
     //update multiplayer switch accent
     let multiplayerSwitch = document.querySelector('input')
     let multiplayerSwitchLabel = document.querySelector('label')
