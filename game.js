@@ -25,7 +25,7 @@ let turn = 0
 let gridSize = 3
 let gameMode = '3 x 3'
 let twoPlayer = false
-let difficulty = 'Easy'
+let difficulty = 'Hard'
 //Used to track the status of the board
 let board = Array(gridSize * gridSize)
 let winner = ''
@@ -240,8 +240,6 @@ const checkForWin = () => {
         let winLine = winIndex.map((index) => {
             return board[index] 
         })
-        //just some useful debugging logs to see state of each winLine on every turn
-           //console.log(key + ' status ' + winLine)
         //check if any win condition has been met - winLine array all same (excluding empty strings)
         if (winLine.some((a) => a === '')) {
         } else {

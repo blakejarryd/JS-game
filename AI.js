@@ -1,5 +1,5 @@
 const computerTurn = () => {
-    if (difficulty = 'Hard') {
+    if (difficulty === 'Hard') {
         computerHard()
     } else {
         ComputerEasy()
@@ -54,28 +54,23 @@ const computerHard = () => {
     let long0 = longestO(boardState)
     if (turn <= 2) {
         if (gameMode != '3 x 3') {
-            console.log('here')
             choice = randomSquare()
         }
         else if (availableDataSet.includes('5')) {
-            console.log('here2')
             choiceDataSet = '5'
             choice = returnSquare(choiceDataSet)
         } 
         else {
-            console.log('here3')
             choiceDataSet = '1'
             choice = returnSquare(choiceDataSet)
         }
     }
     //bug fix where doesnt want to pick a square for drawn state
     else if (availableDataSet.length <= 2 && long0[1] < 2 && longX[1] < 2) {
-        console.log('here4')
         choiceDataSet = availableDataSet[0]
         choice = returnSquare(choiceDataSet)
     }
     else if (longX[1] >= blockThreshold && long0[1] < longX[1]) {
-        console.log('block')
         let blockIndex = boardState[longX[0]]['winCondition']
         for (i of blockIndex) {
             for (s of availableDataSet) {
@@ -86,10 +81,7 @@ const computerHard = () => {
         }
         choice = returnSquare(choiceDataSet)
         } else {
-        console.log('attack')
         let attackIndex = boardState[long0[0]]['winCondition']
-        console.log(boardState)
-        console.log(attackIndex)
         for (i of attackIndex) {
             for (s of availableDataSet) {
                 if (i + 1 == s) {
@@ -99,8 +91,6 @@ const computerHard = () => {
         }
         choice = returnSquare(choiceDataSet)
     }
-    console.log(choiceDataSet)
-    console.log(choice)
     addO(choice)
 }
 
@@ -187,7 +177,6 @@ const returnSquare = (dataindex) => {
     let squares = document.querySelectorAll('.square')
     for (square of squares)
     if (square.dataset.index == dataindex) {
-        console.log(square.dataset.index)
         return square
     }
 }
