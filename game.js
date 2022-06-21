@@ -1,8 +1,7 @@
 //==================================================
 //TIC TAC TOE - GAME ENGINE
 //==================================================
-//*maybe put some words here  
-
+//*maybe put some words here
 
 //==================================================
 //Game Variables
@@ -49,7 +48,7 @@ const gameData = {
             column3:    [2,5,8],
             diagonal1:  [0,4,8],
             diagonal2:  [2,4,6],
-        }      
+        }
     },
     '4 x 4': {
         gridSize: 4,
@@ -73,7 +72,7 @@ const gameData = {
             column4:    [3,7,11,15],
             diagonal1:  [0,5,10,15],
             diagonal2:  [3,6,9,12],
-        }      
+        }
     },
     '5 x 5': {
         gridSize: 5,
@@ -99,7 +98,7 @@ const gameData = {
             column5:    [4,9,14,19,24],
             diagonal1:  [0,6,12,18,24],
             diagonal2:  [4,8,12,16,20],
-        }      
+        }
     },
     '6 x 6': {
         gridSize: 6,
@@ -127,7 +126,7 @@ const gameData = {
             column6:    [5,11,17,23,29,35],
             diagonal1:  [0,7,14,21,28,35],
             diagonal2:  [5,10,15,20,25,30],
-        }      
+        }
     },
     '7 x 7': {
         gridSize: 7,
@@ -157,7 +156,7 @@ const gameData = {
             column7:    [6,13,20,27,34,41,48],
             diagonal1:  [0,8,16,24,32,40,48],
             diagonal2:  [6,12,18,24,30,36,42],
-        }      
+        }
     },
     '8 x 8': {
         gridSize: 8,
@@ -189,7 +188,7 @@ const gameData = {
             column8:    [7,15,23,31,39,47,55,63],
             diagonal1:  [0,9,18,27,36,45,54,63],
             diagonal2:  [7,14,21,28,35,42,49,56],
-        }      
+        }
     },
 } 
 
@@ -200,8 +199,8 @@ const feedbackMessages = {
             'You are making this look easy, try again?',
         ],
         draw: [
-            'This one is all tied up. Try again?', 
-            'Looks like we have got ourselves in a knot this one is all tied up!',
+            'This one is all tied up. Try again?',
+            'Looks like we have got ourselves in a knot. This one is all tied up!',
         ],
         loss: [
             'Bad luck! The computer wins this round. Go again?',
@@ -234,7 +233,7 @@ const initaliseBoard = () => {
     gameBoard.style.fontSize = gameData[gameMode][display].fontSize
     gameBoard.style.gridTemplateColumns = `repeat(${gridSize}, ${squareSize})`
     gameBoard.style.gridTemplateRows = `repeat(${gridSize}, ${squareSize})`
-    for (let i = 1; i <= (gridSize * gridSize); i++) {
+    for (i = 1; i <= (gridSize * gridSize); i++) {
         let square = document.createElement('div')
         square.classList.add("square")
         square.style.borderColor = themes[theme].lines
@@ -290,32 +289,30 @@ const checkForWin = () => {
         winIndex = gameData[gameMode].winConditions[key]
         //map winCon arrays to current board states (winLine)
         let winLine = winIndex.map((index) => {
-            return board[index] 
+            return board[index]
         })
         //check if any win condition has been met - winLine array all same (excluding empty strings)
         if (winLine.some((a) => a === '')) {
         } else {
             if (winLine.every((a) => a === 'X')) {
                 winner = 'X'
+                result = true
+                winMethod = key
                 playerWins++
                 playerTally.textContent = playerWins
-                result = true
-                winMethod = key
             } else if (winLine.every((a) => a === 'O')) {
                 winner = 'O'
-                computerWins++
-                computerTally.textContent = computerWins
                 result = true
                 winMethod = key
+                computerWins++
+                computerTally.textContent = computerWins
             }
         }
     }
 }
 
 const highlightWin = () => {
-    if (winMethod == '') {
-        return
-    }
+    if (winner !== 'draw') {
     let squares = document.querySelectorAll('.square')
     let winIndex = gameData[gameMode].winConditions[winMethod]
     let winSquares = []
@@ -326,6 +323,7 @@ const highlightWin = () => {
     for (square of winSquares) {
         square.classList.add('win')
         square.style.color = themes[theme].lines
+        }
     }
 }
 
@@ -341,7 +339,7 @@ const declareResult = () => {
     } else {
         h3.textContent = feedbackMessages.computerMode.loss[randomQuote]
     }}
-    else if (twoPlayer === true) { 
+    else if (twoPlayer === true) {
         if (winner === 'draw') {
         h3.textContent = feedbackMessages.playerMode.draw[randomQuote]
     } else if (winner === 'X') {
@@ -376,7 +374,7 @@ const restartGame = () => {
     let resultText = document.querySelector('h3')
     if (resultText) {
         resultText.remove()
-    } 
+    }
     //remove restart icon
     let restartButton = document.querySelector('.restart')
     if (restartButton) {
@@ -414,14 +412,14 @@ takeTurnX = (event) => {
     } else {
         addX(square)
     }
-    checkForWin() 
+    checkForWin()
     checkForDraw()
     if (result === true) {
         endGame()
     }
     if (result === false && twoPlayer === false) {
     computerTurn()
-    }   
+    }
 }
 
 resetStats = () => {
@@ -442,26 +440,3 @@ gameBoard.addEventListener('click', takeTurnX)
 //==================================================
 //Creates the board
 initaliseBoard()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -86,7 +86,6 @@ const themes = {
 //==================================================
 
 expandSettingsMenu = () => {
-    let settingsMenu = document.querySelector('.settings-menu')
     settingsMenu.classList.toggle('settings-show')
 }
 
@@ -121,7 +120,7 @@ setTheme = (theme) => {
     if (multiplayerSwitch.checked) {
         multiplayerSwitchLabel.style.background = themes[theme].lines
     } else (
-        multiplayerSwitchLabel.style.background = 'grey' 
+        multiplayerSwitchLabel.style.background = 'grey'
     )
     //add selected class to li element
     let themeElements = document.querySelectorAll('.theme')
@@ -139,7 +138,7 @@ setTheme = (theme) => {
         } else {
             item.style.backgroundColor = themes[theme].settingsBar
         }
-    }  
+    }
 }
 
 setThemeClick = (event) => {
@@ -153,7 +152,6 @@ setThemeClick = (event) => {
     }
 }
 
-    
 expandDropdown = (event) => {
     const isDropdownButton = event.target.matches('[data-dropdown-button]')
     if (!isDropdownButton) {
@@ -161,7 +159,7 @@ expandDropdown = (event) => {
     }
     let dropdown = event.target.parentNode
     let dropdownList = dropdown.querySelector('.dropdown-menu')
-    dropdownList.classList.toggle('dropwdown-show')    
+    dropdownList.classList.toggle('dropwdown-show')
 }
 
 setBoardSize = (event) => {
@@ -220,7 +218,7 @@ hideDifficultyPanel = (event) => {
 
 
 twoPlayerMode = (event) => {
-    let multiplayerSwitchLabel = document.querySelector('label') 
+    let multiplayerSwitchLabel = document.querySelector('label')
     if (event.target.checked) {
         twoPlayer = true
         multiplayerSwitchLabel.style.background = themes[theme].lines
