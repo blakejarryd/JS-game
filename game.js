@@ -42,7 +42,9 @@ setTheme(theme)
 
 
 
-//Required game data
+//==================================================
+//Game Data Structures
+//==================================================
 const gameData = {
     '3 x 3': {
         gridSize: 3,
@@ -172,6 +174,37 @@ const gameData = {
     },
 } 
 
+const feedbackMessages = {
+    computerMode: {
+        win: [
+            'Nice work! You won. Can you do it again?',
+            'You are making this look easy, try again?',
+        ],
+        draw: [
+            'This one is all tied up. Try again?', 
+            'Looks like we have got ourselves in a knot this one is all tied up!',
+        ],
+        loss: [
+            'Bad luck! The computer wins this round. Go again?',
+            'Bad luck! The computer wins this round. Go again?',
+        ],
+    },
+    playerMode: {
+        win: [
+            'Player 1 get\'s the chocalates this time! Play again?',
+            'Player 1 reigns supreme, try again Player 2!',
+        ],
+        draw: [
+            'No one likes a draw. Play again?',
+            'A tie, two evenly matched players!',
+        ],
+        loss: [
+            'Player 2, light up that victory cigar, you win!',
+            'Player 2 is victorious this time round, play again?',
+        ],
+    }
+}
+
 //==================================================
 //Functions
 //==================================================
@@ -279,14 +312,24 @@ const highlightWin = () => {
 
 const declareResult = () => {
     let h3 = document.createElement('h3')
+    let randomQuote = Math.floor(Math.random() * 2)
     h3.style.color = themes[theme].mainText
-    if (winner === 'draw') {
-        h3.textContent = 'This one is all tied up. Try again?'
+    if (twoPlayer === false) { 
+        if (winner === 'draw') {
+        h3.textContent = feedbackMessages.computerMode.draw[randomQuote]
     } else if (winner === 'X') {
-        h3.textContent = 'Nice work! You won. Can you do it again?'
+        h3.textContent = feedbackMessages.computerMode.win[randomQuote]
     } else {
-        h3.textContent = 'Bad luck! The computer wins this round. Go again?'
-    }
+        h3.textContent = feedbackMessages.computerMode.loss[randomQuote]
+    }}
+    else if (twoPlayer === true) { 
+        if (winner === 'draw') {
+        h3.textContent = feedbackMessages.playerMode.draw[randomQuote]
+    } else if (winner === 'X') {
+        h3.textContent = feedbackMessages.playerMode.win[randomQuote]
+    } else {
+        h3.textContent = feedbackMessages.playerMode.loss[randomQuote]
+    }}
     body.appendChild(h3)
 }
 

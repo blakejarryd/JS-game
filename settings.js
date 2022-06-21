@@ -1,8 +1,6 @@
 //==================================================
-//Global variables
+//Settings Data Structures
 //==================================================
-
-
 
 const themes = {
     'Winter Blue': {
@@ -62,6 +60,10 @@ const themes = {
         restartIcon: 'img/Restart-icon-white.png',
     },
 }
+
+//==================================================
+//Settings Functions
+//==================================================
 
 expandSettingsMenu = () => {
     let settingsMenu = document.querySelector('.settings-menu')
@@ -206,5 +208,3 @@ body.addEventListener('click', setThemeClick)
 body.addEventListener('click', setBoardSize)
 body.addEventListener('click', changeDifficulty)
 body.addEventListener('click', hideDifficultyPanel)
-// setTheme(theme)
-//use plus/minus for expand? highlight should be on the dropdown menu items.
