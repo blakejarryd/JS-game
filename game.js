@@ -5,50 +5,25 @@
 
 
 //==================================================
-//Global variables
+//Game Variables
 //==================================================
-//Declare required html elements
-const body = document.querySelector('body')
-const header = document.querySelector('header')
-const boardOverlay = document.querySelector('.board-overlay')
-const gameBoard = document.querySelector('.board')
+let turn = 0
+let board = Array(gridSize * gridSize)
+let winner = ''
+let winMethod = ''
+let result = false
+let playerWins = 0
+let computerWins = 0
+let ties = 0
+
+//==================================================
+//Required Game Elements
+//==================================================
 const squares = document.querySelectorAll('.square')
 const playerTally = document.querySelector('.player-tally-count')
 const computerTally = document.querySelector('.computer-tally-count')
 const resultText = document.querySelector('.result')
-const settingsMenu = document.querySelector('.settings-menu')
-const twoPlayerSwitch = document.querySelector('input')
 const computerName = document.querySelector('.computer-name')
-
-//Keeps track of game turn, incremented each time a square is played
-let turn = 0
-let gridSize = 3
-let gameMode = '3 x 3'
-let twoPlayer = false
-let difficulty = 'Hard'
-//Used to track the status of the board
-let board = Array(gridSize * gridSize)
-let winner = ''
-let winMethod = ''
-//Game has a result
-let result = false
-//Result tallies
-let playerWins = 0
-let computerWins = 0
-let ties = 0
-//theme
-let theme = 'Orange Pop'
-//display mode
-let display = 'desktopDisplay'
-displayWidth = window.innerWidth
-if (displayWidth < 600) {
-    display = 'mobileDisplay'
-} 
-console.log(displayWidth)
-console.log(display)
-setTheme(theme)
-
-
 
 //==================================================
 //Game Data Structures
@@ -449,21 +424,6 @@ takeTurnX = (event) => {
     }   
 }
 
-twoPlayerMode = (event) => {
-    let multiplayerSwitchLabel = document.querySelector('label') 
-    if (event.target.checked) {
-        twoPlayer = true
-        multiplayerSwitchLabel.style.background = themes[theme].lines
-    } else {
-        twoPlayer = false
-        multiplayerSwitchLabel.style.background = 'grey'
-    }
-    let difficultyPanel = document.querySelector('.AI')
-    difficultyPanel.classList.toggle('hide')
-    resetStats()
-    restartGame()
-}
-
 resetStats = () => {
     playerWins = 0
     computerWins = 0
@@ -473,14 +433,18 @@ resetStats = () => {
 }
 
 //==================================================
+//Add Game Event Listeners
+//==================================================
+gameBoard.addEventListener('click', takeTurnX)
+
+//==================================================
 //Run Game
 //==================================================
-
 //Creates the board
 initaliseBoard()
-//Initialises takeTurn  
-gameBoard.addEventListener('click', takeTurnX)
-twoPlayerSwitch.addEventListener('click', twoPlayerMode)
+
+
+
 
 
 

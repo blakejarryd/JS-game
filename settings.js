@@ -1,7 +1,27 @@
 //==================================================
+//Settings Variables
+//==================================================
+let twoPlayer = false
+let difficulty = 'Hard'
+let theme = 'Orange Pop'
+let gameMode = '3 x 3'
+let gridSize = 3
+let display = 'desktopDisplay'
+
+//==================================================
+//Required Settings Elements
+//==================================================
+const body = document.querySelector('body')
+const header = document.querySelector('header')
+const settingsIcon = document.querySelector('.settings-icon')
+const settingsMenu = document.querySelector('.settings-menu')
+const twoPlayerSwitch = document.querySelector('input')
+const boardOverlay = document.querySelector('.board-overlay')
+const gameBoard = document.querySelector('.board')
+
+//==================================================
 //Settings Data Structures
 //==================================================
-
 const themes = {
     'Winter Blue': {
         background: '#011640',
@@ -199,12 +219,42 @@ hideDifficultyPanel = (event) => {
 }
 
 
-const settingsIcon = document.querySelector('.settings-icon')
-body = document.querySelector('body')
+twoPlayerMode = (event) => {
+    let multiplayerSwitchLabel = document.querySelector('label') 
+    if (event.target.checked) {
+        twoPlayer = true
+        multiplayerSwitchLabel.style.background = themes[theme].lines
+    } else {
+        twoPlayer = false
+        multiplayerSwitchLabel.style.background = 'grey'
+    }
+    let difficultyPanel = document.querySelector('.AI')
+    difficultyPanel.classList.toggle('hide')
+    resetStats()
+    restartGame()
+}
 
+updateDisplayMode = () => {
+    displayWidth = window.innerWidth
+    if (displayWidth < 600) {
+        display = 'mobileDisplay'
+    } }
+
+
+
+//==================================================
+//Add Settings Event Listeners
+//==================================================
 settingsIcon.addEventListener('click', expandSettingsMenu)
 body.addEventListener('click', expandDropdown)
 body.addEventListener('click', setThemeClick)
 body.addEventListener('click', setBoardSize)
 body.addEventListener('click', changeDifficulty)
 body.addEventListener('click', hideDifficultyPanel)
+twoPlayerSwitch.addEventListener('click', twoPlayerMode)
+
+//==================================================
+//Initialise default theme
+//==================================================
+updateDisplayMode()
+setTheme(theme)
