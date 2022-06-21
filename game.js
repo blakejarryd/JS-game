@@ -208,6 +208,9 @@ const addX = (square) => {
 
 //Function to add an 'O'
 const addO = (square) => {
+    if(square == null) {
+        square = randomSquare()
+    }
     square.textContent = 'O'
     let index = square.dataset.index - 1
     board[index] = 'O'

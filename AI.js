@@ -45,7 +45,6 @@ const computerHard = () => {
     //if player length greater than threshold
     //Then Block
     //Else go for win
-    let squares = document.querySelectorAll('.square')
     let choiceDataSet = ''
     let choice = ''
     let availableDataSet = availableSquares()
@@ -54,9 +53,28 @@ const computerHard = () => {
     let longX = longestX(boardState)
     let long0 = longestO(boardState)
     if (turn <= 2) {
-        choice = randomSquare()
+        if (gameMode != '3 x 3') {
+            console.log('here')
+            choice = randomSquare()
+        }
+        else if (availableDataSet.includes('5')) {
+            console.log('here2')
+            choiceDataSet = '5'
+            choice = returnSquare(choiceDataSet)
+        } 
+        else {
+            console.log('here3')
+            choiceDataSet = '1'
+            choice = returnSquare(choiceDataSet)
+        }
     }
-    else if (longX[1] >= blockThreshold && long0[1] + 1 < gridSize) {
+    //bug fix where doesnt want to pick a square for drawn state
+    else if (availableDataSet.length <= 2 && long0[1] < 2 && longX[1] < 2) {
+        console.log('here4')
+        choiceDataSet = availableDataSet[0]
+        choice = returnSquare(choiceDataSet)
+    }
+    else if (longX[1] >= blockThreshold && long0[1] < longX[1]) {
         console.log('block')
         let blockIndex = boardState[longX[0]]['winCondition']
         for (i of blockIndex) {
@@ -70,6 +88,8 @@ const computerHard = () => {
         } else {
         console.log('attack')
         let attackIndex = boardState[long0[0]]['winCondition']
+        console.log(boardState)
+        console.log(attackIndex)
         for (i of attackIndex) {
             for (s of availableDataSet) {
                 if (i + 1 == s) {
@@ -83,6 +103,8 @@ const computerHard = () => {
     console.log(choice)
     addO(choice)
 }
+
+
 
 const countX = (array) => {
     let count = 0
@@ -169,3 +191,4 @@ const returnSquare = (dataindex) => {
         return square
     }
 }
+
