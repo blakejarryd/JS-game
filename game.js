@@ -311,10 +311,6 @@ const checkForWin = () => {
         computerWins++
         computerTally.textContent = computerWins 
     }
-    console.log(`It is turn: ${turn}`)
-    console.log(`The board state is:`)
-    console.log(`the longest computer line is ${token2Length}`)
-    console.log(gridSize)
     console.log(boardStatus())
 } 
 
