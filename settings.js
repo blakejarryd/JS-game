@@ -84,11 +84,12 @@ const themes = {
 //==================================================
 //Settings Functions
 //==================================================
-
+//exands the setting menu when the gear icon is clicked
 expandSettingsMenu = () => {
     settingsMenu.classList.toggle('settings-show')
 }
 
+//applies the selected theme to all the elements based on the theme object
 setTheme = (theme) => {
     //update backgroundColors of elements
     body.style.background = themes[theme].background
@@ -141,6 +142,7 @@ setTheme = (theme) => {
     }
 }
 
+//updates the theme variable when a them is clicked 
 setThemeClick = (event) => {
     classArr = event.target.classList
     containsTheme = classArr.contains('theme')
@@ -152,16 +154,7 @@ setThemeClick = (event) => {
     }
 }
 
-expandDropdown = (event) => {
-    const isDropdownButton = event.target.matches('[data-dropdown-button]')
-    if (!isDropdownButton) {
-        return
-    }
-    let dropdown = event.target.parentNode
-    let dropdownList = dropdown.querySelector('.dropdown-menu')
-    dropdownList.classList.toggle('dropwdown-show')
-}
-
+//update the board size when new game mode is selected, resets the current game
 setBoardSize = (event) => {
     classArr = event.target.classList
     containsGridSize = classArr.contains('gridSize')
@@ -186,6 +179,7 @@ setBoardSize = (event) => {
     restartGame()
 }
 
+//update difficulty (can be done mid game i.e. doesnt call restartGame())
 changeDifficulty = (event) => {
     classArr = event.target.classList
     containsDifficulty = classArr.contains('difficulty')
@@ -207,15 +201,16 @@ changeDifficulty = (event) => {
     }
 }
 
+//hides the AI difficulty option when 2 player mode is enabled
 hideDifficultyPanel = (event) => {
     classArr = event.target.classList
     containsDifficulty = classArr.contains('difficulty')
     if (!containsDifficulty) {
         return
     }
-
 }
 
+//Updates to 2 player mode. Resets current game and clears stats
 twoPlayerMode = (event) => {
     let multiplayerSwitchLabel = document.querySelector('label')
     if (event.target.checked) {
@@ -232,6 +227,7 @@ twoPlayerMode = (event) => {
     restartGame()
 }
 
+//Sets Computer name to Player 2
 updatePlayerNames = () => {
     if (twoPlayer) {
         computerName.textContent = 'Player 2'
@@ -240,19 +236,28 @@ updatePlayerNames = () => {
     }
 }
 
+//Sets display mode. If the game is opened on a mobile device grid is set to smaller squares
+//Note only works on page refresh, new game mode etc. Not on screen resize
 updateDisplayMode = () => {
     displayWidth = window.innerWidth
     if (displayWidth < 600) {
         display = 'mobileDisplay'
-    } }
+    } 
+}
 
-
+//Clears win tallies
+resetStats = () => {
+    playerWins = 0
+    computerWins = 0
+    ties = 0
+    playerTally.textContent = playerWins
+    computerTally.textContent = computerWins
+}
 
 //==================================================
 //Add Settings Event Listeners
 //==================================================
 settingsIcon.addEventListener('click', expandSettingsMenu)
-body.addEventListener('click', expandDropdown)
 body.addEventListener('click', setThemeClick)
 body.addEventListener('click', setBoardSize)
 body.addEventListener('click', changeDifficulty)

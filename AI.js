@@ -1,58 +1,56 @@
-const computerTurn = () => {
-    if (difficulty === 'Hard') {
-        choice = computerHard()
-    } else {
-        choice = ComputerEasy()
-    }
-    addToken(choice, currentToken)
-    checkForWin() 
-    checkForDraw()
-    if (result === true) {
-         endGame()
-    }   
-}
-
-const ComputerEasy = () => {
-    let squares = document.querySelectorAll('.square')
-    let availableSpots = []
-    for (square of squares) {
-        if (square.textContent === '' ) {
-            availableSpots.push(square)
+//==================================================
+//AI Functions
+//==================================================
+//Check for the Player which win condition line is most complete
+const longestPlayer = (boardState) => {
+    let key = ''
+    let most = -1
+    for (line in boardState) {
+        if (boardState[line]['lineCountPlayer'] > most) {
+            most = boardState[line]['lineCountPlayer']
+            key = line
         }
     }
-    let randomChoice = Math.floor(Math.random() * availableSpots.length) 
-    let choice = availableSpots[randomChoice] 
+    return [key,most]
+}
+
+//Check for the Computer which win condition line is most complete
+const longestComputer = (boardState) => {
+    let key = ''
+    let most = -1
+    for (line in boardState) {
+        if (boardState[line]['lineCountComputer'] > most) {
+            most = boardState[line]['lineCountComputer']
+            key = line
+        }
+    }
+    return [key,most]
+}
+
+//Easy computer picks random square
+const ComputerEasy = () => {
+    choice = randomSquare()
     return choice
 }
 
-const boardStatus = () => {
-        //get keys of win conditions object
-        let winConditionKeys = Object.keys(gameData[gameMode].winConditions)
-        let boardState = {}
-        for (key of winConditionKeys) {
-            let x = boardState[key] = {}
-            let winIndex = gameData[gameMode].winConditions[key]
-            let current = winIndex.map((index) => {
-                return board[index]})
-            boardState[key]['winCondition'] = winIndex
-            boardState[key]['currentState'] = current
-            boardState[key]['lineCountX'] = countX(current)
-            boardState[key]['lineCountO'] = countO(current)
-            }
-            return boardState
-            }
 
+//Hard computer
+/*============================================================================
+1. Picks random square 
+- Except for 3x3 mode where it takes middle if free, else takes top left
+2. If player has a met > 75% of a win condition
+- Block player
+3. Else
+- Increases its own current longest winning condition
+============================================================================*/
 const computerHard = () => {
-    //if player length greater than threshold
-    //Then Block
-    //Else go for win
     let choiceDataSet = ''
     let choice = ''
     let availableDataSet = availableSquares()
     let boardState = boardStatus()
     blockThreshold = Math.floor(gridSize * 0.75)
-    let longX = longestX(boardState)
-    let long0 = longestO(boardState)
+    let longX = longestPlayer(boardState)
+    let long0 = longestComputer(boardState)
     if (turn <= 2) {
         if (gameMode != '3 x 3') {
             choice = randomSquare()
@@ -95,74 +93,22 @@ const computerHard = () => {
     return choice
 }
 
-
-
-const countX = (array) => {
-    let count = 0
-    if (array.includes('O')) {
-        count = 0
-        return count
+//Computer turn wrapper 
+const computerTurn = () => {
+    if (difficulty === 'Hard') {
+        choice = computerHard()
+    } else {
+        choice = ComputerEasy()
     }
-    array.forEach((val) => {
-        if (val === 'X') {
-            count++
-        }
-    })
-    return count
+    addToken(choice, currentToken)
+    checkForWin() 
+    checkForDraw()
+    if (result === true) {
+         endGame()
+    }   
 }
 
-
-const countO = (array) => {
-    let count = 0
-    if (array.includes('X')) {
-        count = 0
-        return count
-    }
-    array.forEach((val) => {
-        if (val === 'O') {
-            count++
-        }
-    })
-    return count
-}
-
-const longestX = (boardState) => {
-    let key = ''
-    let most = -1
-    for (line in boardState) {
-        if (boardState[line]['lineCountX'] > most) {
-            most = boardState[line]['lineCountX']
-            key = line
-        }
-    }
-    return [key,most]
-}
-
-const longestO = (boardState) => {
-    let key = ''
-    let most = -1
-    for (line in boardState) {
-        if (boardState[line]['lineCountO'] > most) {
-            most = boardState[line]['lineCountO']
-            key = line
-        }
-    }
-    return [key,most]
-}
-
-const randomSquare = () => {
-    let squares = document.querySelectorAll('.square')
-    let availableSpots = []
-    for (square of squares) {
-        if (square.textContent === '' ) {
-            availableSpots.push(square)
-        }
-    }
-    let randomChoice = Math.floor(Math.random() * availableSpots.length) 
-    let choice = availableSpots[randomChoice] 
-    return choice
-}
-
+//returns an array of the data index values of available squares
 const availableSquares = () => {
     let squares = document.querySelectorAll('.square')
     let availableDataSet = []
@@ -174,6 +120,7 @@ const availableSquares = () => {
     return availableDataSet
 }
 
+//returns a square element based on a provied square data index value
 const returnSquare = (dataindex) => {
     let squares = document.querySelectorAll('.square')
     for (square of squares)
@@ -182,3 +129,11 @@ const returnSquare = (dataindex) => {
     }
 }
 
+//Selects a random square based of available squares
+const randomSquare = () => {
+    let availableSpots = availableSquares()
+    let randomChoice = Math.floor(Math.random() * availableSpots.length) 
+    let choiceDataIndex = availableSpots[randomChoice]
+    let choice = returnSquare(choiceDataIndex)
+    return choice
+}

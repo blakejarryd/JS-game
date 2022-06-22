@@ -1,9 +1,4 @@
 //==================================================
-//TIC TAC TOE - GAME ENGINE
-//==================================================
-//*maybe put some words here
-
-//==================================================
 //Game Variables
 //==================================================
 let turn = 0
@@ -227,7 +222,7 @@ const feedbackMessages = {
 }
 
 //==================================================
-//Functions
+//Game Functions
 //==================================================
 
 //Add squares to board based on grid size
@@ -246,25 +241,83 @@ const initaliseBoard = () => {
     }
 }
 
-//Update token to be played between 'X' & 'O's
-const updateToken = () => {
-    if (turn % 2 === 0) {
-        currentToken = token1
-    } else {
-        currentToken = token2
+//creates an object with every column, row, diagonal as keys
+//includes; Winning Conditions, Current State, Token 1 count, Token 2 count
+const boardStatus = () => {
+    let winConditionKeys = Object.keys(gameData[gameMode].winConditions)
+    let boardState = {}
+    for (key of winConditionKeys) {
+        boardState[key] = {}
+        let winIndex = gameData[gameMode].winConditions[key]
+        let currentLineStatus = winIndex.map((index) => {
+            return board[index]})
+        boardState[key]['winCondition'] = winIndex
+        boardState[key]['currentState'] = currentLineStatus
+        boardState[key]['lineCountPlayer'] = countPlayer(currentLineStatus)
+        boardState[key]['lineCountComputer'] = countComputer(currentLineStatus)
+        }
+    return boardState
+}
+
+//Returns count of unobstructed player tokens in a provided line status array
+const countPlayer = (array) => {
+    let count = 0
+    if (array.includes(token2)) {
+        count = 0
+        return count
     }
+    array.forEach((val) => {
+        if (val === token1) {
+            count++
+        }
+    })
+    return count
 }
 
-//Place token on the game board
-const addToken = (square, token) => {
-    square.textContent = token
-    let index = square.dataset.index - 1
-    board[index] = token
-    turn++
-    updateToken()
+//Returns count of unobstructed computer tokens in a provided line status array
+const countComputer = (array) => {
+    let count = 0
+    if (array.includes(token1)) {
+        count = 0
+        return count
+    }
+    array.forEach((val) => {
+        if (val === token2) {
+            count++
+        }
+    })
+    return count
 }
 
-//Checks if the game is a draw
+//Checks if win condition has been met, uses boardStatus return object
+const checkForWin = () => {
+    boardState = boardStatus()
+    token1key = longestPlayer(boardState)[0]
+    token2key = longestComputer(boardState)[0]
+    token1Length = longestPlayer(boardState)[1]
+    token2Length = longestComputer(boardState)[1]
+    
+    if (token1Length === gridSize) {
+        winner = 'X'
+                result = true
+                winMethod = token1key
+                playerWins++
+                playerTally.textContent = playerWins 
+    }
+    if (token2Length === gridSize) {
+        winner = 'O'
+                result = true
+                winMethod = token2key
+                playerWins++
+                playerTally.textContent = playerWins 
+    }
+    console.log(`It is turn: ${turn}`)
+    console.log(`The board state is:`)
+    console.log(boardStatus())
+} 
+
+//Checks if the game is a draw, based of max turns 
+//* Could make smarter to end game earlier if win is not possible
 const checkForDraw= () => {
     if (result === true) {
         return
@@ -273,38 +326,6 @@ const checkForDraw= () => {
         winner = 'draw'
         ++ties
         result = true
-    }
-}
-
-//Checks for a winner
-const checkForWin = () => {
-    //get keys of win conditions object
-    let winConditionKeys = Object.keys(gameData[gameMode].winConditions)
-    //loop through win conditions to access possible win arrays (winCon)
-    for (key of winConditionKeys) {
-        let winIndex = []
-        winIndex = gameData[gameMode].winConditions[key]
-        //map winCon arrays to current board states (winLine)
-        let winLine = winIndex.map((index) => {
-            return board[index]
-        })
-        //check if any win condition has been met - winLine array all same (excluding empty strings)
-        if (winLine.some((a) => a === '')) {
-        } else {
-            if (winLine.every((a) => a === 'X')) {
-                winner = 'X'
-                result = true
-                winMethod = key
-                playerWins++
-                playerTally.textContent = playerWins
-            } else if (winLine.every((a) => a === 'O')) {
-                winner = 'O'
-                result = true
-                winMethod = key
-                computerWins++
-                computerTally.textContent = computerWins
-            }
-        }
     }
 }
 
@@ -357,12 +378,14 @@ const restartGameButton = () => {
     restartButton.addEventListener('click',restartGame)
 }
 
+//wrapper for the end of game functions
 const endGame = () => {
     highlightWin()
     declareResult()
     restartGameButton()
 }
 
+//resets all the game variables and elements when the restart icon is clicked
 const restartGame = () => {
     //remove squares
     let squares = document.querySelectorAll('.square')
@@ -389,6 +412,24 @@ const restartGame = () => {
     initaliseBoard()
 }
 
+//Update token to be played between 'X' & 'O's
+const updateToken = () => {
+    if (turn % 2 === 0) {
+        currentToken = token1
+    } else {
+        currentToken = token2
+    }
+}
+
+//Place token on the game board
+const addToken = (square, token) => {
+    square.textContent = token
+    let index = square.dataset.index - 1
+    board[index] = token
+    turn++
+    updateToken()
+}
+
 //Logic that runs each time an 'X' or 'O' is attempted to be placed
 takeTurn = (event) => {
     let square = event.target
@@ -405,14 +446,6 @@ takeTurn = (event) => {
     if (result === false && twoPlayer === false) {
     computerTurn()
     }
-}
-
-resetStats = () => {
-    playerWins = 0
-    computerWins = 0
-    ties = 0
-    playerTally.textContent = playerWins
-    computerTally.textContent = computerWins
 }
 
 //==================================================
