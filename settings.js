@@ -216,7 +216,6 @@ hideDifficultyPanel = (event) => {
 
 }
 
-
 twoPlayerMode = (event) => {
     let multiplayerSwitchLabel = document.querySelector('label')
     if (event.target.checked) {
@@ -228,8 +227,17 @@ twoPlayerMode = (event) => {
     }
     let difficultyPanel = document.querySelector('.AI')
     difficultyPanel.classList.toggle('hide')
+    updatePlayerNames()
     resetStats()
     restartGame()
+}
+
+updatePlayerNames = () => {
+    if (twoPlayer) {
+        computerName.textContent = 'Player 2'
+    } else {
+        computerName.textContent = 'Computer'
+    }
 }
 
 updateDisplayMode = () => {

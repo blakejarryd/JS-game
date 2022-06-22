@@ -14,6 +14,9 @@ let result = false
 let playerWins = 0
 let computerWins = 0
 let ties = 0
+let token1 = 'X'
+let token2 = 'O'
+let currentToken = token1
 
 //==================================================
 //Required Game Elements
@@ -241,31 +244,24 @@ const initaliseBoard = () => {
         square.dataset.index = i
         gameBoard.appendChild(square)
     }
-    //logic based on 2player or 1player
-    if (twoPlayer) {
-        computerName.textContent = 'Player 2'
+}
+
+//Update token to be played between 'X' & 'O's
+const updateToken = () => {
+    if (turn % 2 === 0) {
+        currentToken = token1
     } else {
-        computerName.textContent = 'Computer'
+        currentToken = token2
     }
 }
 
-//Function to add an 'X'
-const addX = (square) => {
-    square.textContent = 'X'
+//Place token on the game board
+const addToken = (square, token) => {
+    square.textContent = token
     let index = square.dataset.index - 1
-    board[index] = 'X'
+    board[index] = token
     turn++
-}
-
-//Function to add an 'O'
-const addO = (square) => {
-    if(square == null) {
-        square = randomSquare()
-    }
-    square.textContent = 'O'
-    let index = square.dataset.index - 1
-    board[index] = 'O'
-    turn++
+    updateToken()
 }
 
 //Checks if the game is a draw
@@ -280,6 +276,7 @@ const checkForDraw= () => {
     }
 }
 
+//Checks for a winner
 const checkForWin = () => {
     //get keys of win conditions object
     let winConditionKeys = Object.keys(gameData[gameMode].winConditions)
@@ -311,6 +308,7 @@ const checkForWin = () => {
     }
 }
 
+//highlights the winner by giving winning squares a 'win' class and setting them to the line colour
 const highlightWin = () => {
     if (winner !== 'draw') {
     let squares = document.querySelectorAll('.square')
@@ -319,7 +317,6 @@ const highlightWin = () => {
     winSquares = winIndex.map((index) => {
         return squares[index]
     })
-    //add win class to winning squares and set to line color
     for (square of winSquares) {
         square.classList.add('win')
         square.style.color = themes[theme].lines
@@ -327,6 +324,7 @@ const highlightWin = () => {
     }
 }
 
+//Appends game result user feedback to the page
 const declareResult = () => {
     let h3 = document.createElement('h3')
     let randomQuote = Math.floor(Math.random() * 2)
@@ -350,6 +348,7 @@ const declareResult = () => {
     body.appendChild(h3)
 }
 
+//Appends restart game button to the page 
 const restartGameButton = () => {
     let restartButton = document.createElement('img')
     restartButton.src = themes[theme].restartIcon
@@ -380,38 +379,24 @@ const restartGame = () => {
     if (restartButton) {
     restartButton.remove()
     }
-    //reset turn count
+    //Reset game variables
     turn = 0
-    //reset winner
+    currentToken = token1
     winner = ''
-    //reset board array
     board = []
-    //update result boolean to false
     result = false
     //create board
     initaliseBoard()
 }
 
 //Logic that runs each time an 'X' or 'O' is attempted to be placed
-takeTurnX = (event) => {
+takeTurn = (event) => {
     let square = event.target
-    //if game is over return
-    if (result === true) {
-        return
-    }
     //if square already used return
     if (square.innerText != "") {
         return
     }
-    if (twoPlayer) {
-        if (turn % 2 === 0) {
-        addX(square)
-        } else {
-        addO(square)
-        }
-    } else {
-        addX(square)
-    }
+    addToken(square, currentToken)
     checkForWin()
     checkForDraw()
     if (result === true) {
@@ -433,10 +418,10 @@ resetStats = () => {
 //==================================================
 //Add Game Event Listeners
 //==================================================
-gameBoard.addEventListener('click', takeTurnX)
+gameBoard.addEventListener('click', takeTurn)
 
 //==================================================
-//Run Game
+//Create game board
 //==================================================
-//Creates the board
 initaliseBoard()
+

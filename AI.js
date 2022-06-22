@@ -1,9 +1,10 @@
 const computerTurn = () => {
     if (difficulty === 'Hard') {
-        computerHard()
+        choice = computerHard()
     } else {
-        ComputerEasy()
+        choice = ComputerEasy()
     }
+    addToken(choice, currentToken)
     checkForWin() 
     checkForDraw()
     if (result === true) {
@@ -21,7 +22,7 @@ const ComputerEasy = () => {
     }
     let randomChoice = Math.floor(Math.random() * availableSpots.length) 
     let choice = availableSpots[randomChoice] 
-    addO(choice)
+    return choice
 }
 
 const boardStatus = () => {
@@ -91,7 +92,7 @@ const computerHard = () => {
         }
         choice = returnSquare(choiceDataSet)
     }
-    addO(choice)
+    return choice
 }
 
 
