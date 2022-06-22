@@ -296,23 +296,25 @@ const checkForWin = () => {
     token2key = longestComputer(boardState)[0]
     token1Length = longestPlayer(boardState)[1]
     token2Length = longestComputer(boardState)[1]
-    
-    if (token1Length === gridSize) {
+    if (token1Length == gridSize) {
         winner = 'X'
-                result = true
-                winMethod = token1key
-                playerWins++
-                playerTally.textContent = playerWins 
+        result = true
+        winMethod = token1key
+        playerWins++
+        playerTally.textContent = playerWins 
     }
-    if (token2Length === gridSize) {
+    if (token2Length == gridSize) {
+        console.log('am I here')
         winner = 'O'
-                result = true
-                winMethod = token2key
-                playerWins++
-                playerTally.textContent = playerWins 
+        result = true
+        winMethod = token2key
+        computerWins++
+        computerTally.textContent = computerWins 
     }
     console.log(`It is turn: ${turn}`)
     console.log(`The board state is:`)
+    console.log(`the longest computer line is ${token2Length}`)
+    console.log(gridSize)
     console.log(boardStatus())
 } 
 
