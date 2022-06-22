@@ -304,7 +304,6 @@ const checkForWin = () => {
         playerTally.textContent = playerWins 
     }
     if (token2Length == gridSize) {
-        console.log('am I here')
         winner = 'O'
         result = true
         winMethod = token2key
