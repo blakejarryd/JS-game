@@ -90,7 +90,7 @@ expandSettingsMenu = () => {
 }
 
 //applies the selected theme to all the elements based on the theme object
-setTheme = (theme) => {
+applyTheme = (theme) => {
     //update backgroundColors of elements
     body.style.background = themes[theme].background
     header.style.background = themes[theme].header
@@ -143,14 +143,14 @@ setTheme = (theme) => {
 }
 
 //updates the theme variable when a them is clicked 
-setThemeClick = (event) => {
+setTheme = (event) => {
     classArr = event.target.classList
     containsTheme = classArr.contains('theme')
     if (!containsTheme) {
         return
     } else {
         theme = event.target.textContent
-        setTheme(theme)
+        applyTheme(theme)
     }
 }
 
@@ -258,7 +258,7 @@ resetStats = () => {
 //Add Settings Event Listeners
 //==================================================
 settingsIcon.addEventListener('click', expandSettingsMenu)
-body.addEventListener('click', setThemeClick)
+body.addEventListener('click', setTheme)
 body.addEventListener('click', setBoardSize)
 body.addEventListener('click', changeDifficulty)
 body.addEventListener('click', hideDifficultyPanel)
@@ -268,4 +268,4 @@ twoPlayerSwitch.addEventListener('click', twoPlayerMode)
 //Initialise default theme
 //==================================================
 updateDisplayMode()
-setTheme(theme)
+applyTheme(theme)
