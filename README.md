@@ -17,8 +17,9 @@ The easy AI chooses a square at random.
 **Hard**
 
 1. Picks random square. Except for 3x3 mode where it takes middle if free, else takes top left.
-2. If player has a met > 75% of a win condition. Blocks the players line closest to win.
-3. Else it increases its own current longest winning line
+2. If Computer line is longer than Player line, computers adds to its "winning line"
+3. Else If player has a met > 75% of a win condition. Blocks the players line closest to win.
+4. Else it increases its own current longest "winning line"
 
 ### 2 Player Mode
 
