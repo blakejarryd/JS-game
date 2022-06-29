@@ -6,6 +6,7 @@ let difficulty = 'Hard'
 let theme = 'Orange Pop'
 let gameMode = '3 x 3'
 let gridSize = 3
+let displayWidth = 0
 let display = 'desktopDisplay'
 
 //==================================================
@@ -239,7 +240,7 @@ updatePlayerNames = () => {
 //Sets display mode. If the game is opened on a mobile device grid is set to smaller squares
 //Note only works on page refresh, new game mode etc. Not on screen resize
 updateDisplayMode = () => {
-    displayWidth = window.innerWidth
+    let displayWidth = window.innerWidth
     if (displayWidth < 600) {
         display = 'mobileDisplay'
     } 
@@ -253,6 +254,11 @@ resetStats = () => {
     playerTally.textContent = playerWins
     computerTally.textContent = computerWins
 }
+
+function reportWindowSize() {
+    heightOutput.textContent = window.innerHeight;
+    widthOutput.textContent = window.innerWidth;
+  }
 
 //==================================================
 //Add Settings Event Listeners
