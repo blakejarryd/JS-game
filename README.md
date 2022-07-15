@@ -1,13 +1,15 @@
 # TIC TAC TOE
 
-## Technology
+The classic tic tac toe game built in a front end web app. 
 
-1. JavaScript
-2. CSS
-3. HTML
+The game can be played here https://blakejarryd.github.io/Tic-Tac-Toe/
+
+## Technologies Used
+- JavaScript
+- CSS
+- HTML
 
 ## Game Features
-
 ### AI Mode
 
 **Easy**
